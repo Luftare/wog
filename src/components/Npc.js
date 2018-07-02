@@ -1,7 +1,21 @@
+import React, { Component } from "react";
 import styled from "styled-components";
+import HpBar from "./HpBar";
 
-export default styled.div`
+const Container = styled.div`
   display: block;
-  padding: 16px;
+  width: 100px;
+  height: 100px;
   background-color: pink;
 `;
+
+export default class Npc extends Component {
+  render() {
+    const hpRatio = this.props.npc.hp / this.props.npc.maxHp;
+    return (
+      <Container onMouseDown={this.props.onMouseDown}>
+        <HpBar ratio={hpRatio} />
+      </Container>
+    );
+  }
+}

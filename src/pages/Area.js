@@ -11,31 +11,36 @@ const Container = styled.div`
 
 @inject("router")
 @inject("areaStore")
+@inject("playerStore")
 @observer
 class Area extends Component {
   constructor(props) {
     super(props);
     const { areaStore, router } = this.props;
-    areaStore.initArea(router.params.id);
+    areaStore.setArea(router.params.id);
+    areaStore.createNPCs();
   }
 
   componentWillUpdate() {
     const { areaStore, router } = this.props;
-    if(router.params.id !== areaStore.area.id) {
-      areaStore.initArea(router.params.id);
+    if (router.params.id !== areaStore.areaIndex) {
+      areaStore.setArea(router.params.id);
+      areaStore.createNPCs();
     }
   }
 
   render() {
-    const { router, areaStore } = this.props;
+    const { router, areaStore, playerStore } = this.props;
     return (
       <Container>
         Area: {router.params.id}, Name: {areaStore.area.name}
         <NpcContainer>
           {areaStore.npcs.map((npc, i) => (
-            <Npc key={i} onMouseDown={npc.handleClick}>
-              {npc.name}
-            </Npc>
+            <Npc
+              key={i}
+              npc={npc}
+              onMouseDown={() => areaStore.handleNpcClick(npc, playerStore)}
+            />
           ))}
         </NpcContainer>
       </Container>

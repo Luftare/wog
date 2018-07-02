@@ -5,8 +5,4 @@ export default class Rat extends Creep {
     super(props);
     this.name = "Rat";
   }
-
-  handleClick() {
-    console.log("A Rat got clicked!");
-  }
 }

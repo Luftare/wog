@@ -1,15 +1,19 @@
-import { action, observable } from "mobx";
+import { action, observable, computed } from "mobx";
 import areas from "../config/areas";
 
 class AreaStore {
   @observable npcs = [];
   @observable name = "";
-  @observable area = areas[0];
+  @observable areaIndex = 0;
+
+  @computed
+  get area() {
+    return areas[this.areaIndex];
+  }
 
   @action
-  initArea = areaIndex => {
-    this.area = areas[areaIndex];
-    this.createNPCs();
+  setArea = areaIndex => {
+    this.areaIndex = areaIndex;
   };
 
   @action
@@ -22,6 +26,16 @@ class AreaStore {
       const level = this.area.level + Math.floor(Math.random() * 2);
       return new npcConstructor(level);
     });
+  };
+
+  @action
+  handleNpcClick = (targetNpc, playerStore) => {
+    this.npcs = this.npcs.map(
+      npc =>
+        npc === targetNpc
+          ? { ...npc, hp: npc.hp - playerStore.meleeDamage }
+          : npc
+    );
   };
 }
 
