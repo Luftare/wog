@@ -18,25 +18,46 @@ class AreaStore {
 
   @action
   createNPCs = () => {
-    this.npcs = [...Array(this.area.npcCount)].map(() => {
-      const npcConstructorIndex = Math.floor(
-        Math.random() * this.area.npcs.length
-      );
-      const npcConstructor = this.area.npcs[npcConstructorIndex];
-      const level = this.area.level + Math.floor(Math.random() * 2);
-      return new npcConstructor(level);
-    });
+    this.npcs = [...Array(this.area.npcCount)].map(this.getRandomNewCreep);
+  };
+
+  @action
+  getRandomNewCreep = () => {
+    const npcConstructorIndex = Math.floor(
+      Math.random() * this.area.npcs.length
+    );
+    const npcConstructor = this.area.npcs[npcConstructorIndex];
+    const level = this.area.level + Math.floor(Math.random() * 2);
+    return new npcConstructor(level);
   };
 
   @action
   handleNpcClick = (targetNpc, playerStore) => {
-    this.npcs = this.npcs.map(
-      npc =>
-        npc === targetNpc
-          ? { ...npc, hp: npc.hp - playerStore.meleeDamage }
-          : npc
-    );
+    this.npcs = this.npcs.map(npc => {
+      if (npc === targetNpc) {
+        npc.hp -= playerStore.meleeDamage;
+        if (npc.hp <= 0) {
+          setTimeout(() => {
+            this.respawnNewNPC(npc);
+          }, 1000);
+        }
+        return npc;
+      } else {
+        return npc;
+      }
+    });
   };
+
+  @action
+  respawnNewNPC(targetNpc) {
+    this.npcs = this.npcs.map(npc => {
+      if (npc === targetNpc) {
+        return this.getRandomNewCreep();
+      } else {
+        return npc;
+      }
+    });
+  }
 }
 
 export default new AreaStore();

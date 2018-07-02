@@ -6,5 +6,5 @@ export default styled.div`
   width: 100%;
   box-sizing: border-box;
   padding: 16px;
-  background-color: yellow;
+  background-color: lightgreen;
 `;

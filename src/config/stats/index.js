@@ -6,7 +6,7 @@ const conf = {
     return 2 + level;
   },
   levelToPlayerBaseDamage(level) {
-    return 5 + level;
+    return 25 + level;
   }
 };
 
