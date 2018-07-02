@@ -4,6 +4,10 @@ import stats from "../config/stats";
 class PlayerStore {
   @observable level = 1;
 
+  constructor() {
+    window.addEventListener("tick", () => {});
+  }
+
   @computed
   get meleeDamage() {
     return stats.levelToPlayerBaseDamage(this.level);

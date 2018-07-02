@@ -8,6 +8,13 @@ import Router from "./stores/Router";
 import areaStore from "./stores/areaStore";
 import playerStore from "./stores/playerStore";
 import { Provider } from "mobx-react";
+import Ticker from "./utils/Ticker";
+
+new Ticker({
+  time: 1000,
+  eventName: "tick",
+  payload: { frequency: 1000 }
+});
 
 const Root = (
   <Provider

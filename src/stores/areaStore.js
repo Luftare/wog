@@ -6,6 +6,10 @@ class AreaStore {
   @observable name = "";
   @observable areaIndex = 0;
 
+  constructor() {
+    window.addEventListener("tick", () => {});
+  }
+
   @computed
   get area() {
     return areas[this.areaIndex];
