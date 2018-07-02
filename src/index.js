@@ -1,15 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
+import RouterComponent from "./components/Router";
 import registerServiceWorker from "./registerServiceWorker";
-
+import routes from "./config/routes";
+import Router from "./stores/Router";
+import playerStore from "./stores/playerStore";
 import { Provider } from "mobx-react";
-import UiStore from "./stores/UiStore";
 
 const Root = (
-  <Provider UiStore={UiStore}>
-    <App />
+  <Provider router={new Router(routes)} playerStore={playerStore}>
+    <RouterComponent />
   </Provider>
 );
 

@@ -1,0 +1,38 @@
+Idea:
+- Grinding game
+- Click to damage enemies
+- Player explores a world map
+- Each map contains 1-5 creeps at once
+- New enemies spawn once current creeps are slain
+- Player has hp
+- Player has level
+- Player har experience
+- Player gains experience through killing enemies
+
+Entities:
+- Player
+- NPCs
+- World map
+- Area of the map where creeps spawn
+- Items and weapons
+- Inventory
+- Skills
+
+Game model:
+- Currency
+- Level
+
+Functionality:
+- Quests
+- Cooldowns
+- Over time effects
+- Item slots
+- Bosses
+- Dungeons
+- Multiplayer
+
+Pages:
+- area
+- inventory
+- town
+- grave
