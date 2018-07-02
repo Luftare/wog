@@ -1,4 +1,4 @@
-import NPC from "./NPC";
+import NPC from "./index";
 
 export default class Creep extends NPC {
   handleClick() {

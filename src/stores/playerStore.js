@@ -1,4 +1,4 @@
-import { action, observable, computed, autorun } from "mobx";
+import { observable } from "mobx";
 
 class PlayerStore {
   @observable level = 1;

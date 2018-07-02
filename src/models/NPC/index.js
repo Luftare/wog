@@ -1,5 +1,7 @@
 export default class NPC {
-  constructor() {}
+  constructor({ level }) {
+    this.level = level;
+  }
 
   handleClick() {
     console.log("I got clicked...");
