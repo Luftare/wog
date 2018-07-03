@@ -6,6 +6,5 @@ export default class NPC {
     this.level = level;
     this.hp = hp;
     this.maxHp = hp;
-    this.id = Math.floor(Math.random() * 10000);
   }
 }

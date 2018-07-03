@@ -9,10 +9,11 @@ import areaStore from "./stores/areaStore";
 import playerStore from "./stores/playerStore";
 import { Provider } from "mobx-react";
 import Ticker from "./utils/Ticker";
+import { EVENT_TICK } from "./constants";
 
 new Ticker({
   time: 1000,
-  eventName: "tick",
+  eventName: EVENT_TICK,
   payload: { frequency: 1000 }
 });
 

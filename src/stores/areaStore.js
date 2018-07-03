@@ -1,5 +1,11 @@
 import { action, observable, computed } from "mobx";
 import areas from "../config/areas";
+import {
+  EVENT_NPC_DIED,
+  EVENT_NPC_RECEIVE_DAMAGE,
+  EVENT_TICK
+} from "../constants";
+import emit from "../utils/emitter";
 
 class AreaStore {
   @observable npcs = [];
@@ -7,7 +13,22 @@ class AreaStore {
   @observable areaIndex = 0;
 
   constructor() {
-    window.addEventListener("tick", () => {});
+    window.addEventListener(EVENT_TICK, () => {});
+
+    window.addEventListener(EVENT_NPC_RECEIVE_DAMAGE, ({ detail: data }) => {
+      const { npc: targetNpc, damage } = data;
+      this.npcs = this.npcs.map(npc => {
+        if (npc === targetNpc) {
+          npc.hp -= damage;
+          if (npc.hp <= 0) {
+            this.handleNpcDeath(npc);
+          }
+          return npc;
+        } else {
+          return npc;
+        }
+      });
+    });
   }
 
   @computed
@@ -21,7 +42,7 @@ class AreaStore {
   };
 
   @action
-  createNPCs = () => {
+  createNpcs = () => {
     this.npcs = [...Array(this.area.npcCount)].map(this.getRandomNewCreep);
   };
 
@@ -36,24 +57,15 @@ class AreaStore {
   };
 
   @action
-  handleNpcClick = (targetNpc, playerStore) => {
-    this.npcs = this.npcs.map(npc => {
-      if (npc === targetNpc) {
-        npc.hp -= playerStore.meleeDamage;
-        if (npc.hp <= 0) {
-          setTimeout(() => {
-            this.respawnNewNPC(npc);
-          }, 1000);
-        }
-        return npc;
-      } else {
-        return npc;
-      }
-    });
+  handleNpcDeath = npc => {
+    emit(EVENT_NPC_DIED, npc);
+    setTimeout(() => {
+      this.respawnNewNpc(npc);
+    }, 1000);
   };
 
   @action
-  respawnNewNPC(targetNpc) {
+  respawnNewNpc(targetNpc) {
     this.npcs = this.npcs.map(npc => {
       if (npc === targetNpc) {
         return this.getRandomNewCreep();
