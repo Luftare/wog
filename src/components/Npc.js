@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import HpBar from "./HpBar";
+import FlyingMessage from "./FlyingMessage";
 
 const Container = styled.div`
+  position: relative;
   display: block;
   width: 100px;
   height: 100px;
@@ -28,6 +30,11 @@ export default class Npc extends Component {
           {npc.name} {npc.level}
         </div>
         <div>{npc.aggro ? "aggro" : null}</div>
+        {npc.messages.map((message, i) => (
+          <FlyingMessage left={`${Math.floor(Math.random() * 100)}%`} key={i}>
+            {message.value}
+          </FlyingMessage>
+        ))}
       </Container>
     );
   }

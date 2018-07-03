@@ -8,4 +8,5 @@ export default styled.div`
   width: 100%;
   box-sizing: border-box;
   background-color: lightgreen;
+  overflow: hidden;
 `;

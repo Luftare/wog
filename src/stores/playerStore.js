@@ -15,6 +15,7 @@ import {
 
 class PlayerStore {
   @observable level = 1;
+  @observable name = "Jeppe";
   @observable experience = 0;
   @observable hp = 100;
 

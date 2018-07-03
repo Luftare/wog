@@ -38,6 +38,12 @@ class AreaStore {
       this.npcs = this.npcs.map(npc => {
         if (npc === targetNpc) {
           npc.hp -= damage;
+          npc.messages = [...npc.messages, { value: damage }];
+          clearTimeout(npc.messageFlushTimeoutId);
+          npc.messageFlushTimeoutId = setTimeout(() => {
+            npc.messages = [];
+            this.npcs = [...this.npcs];
+          }, 5000);
           if (npc.hp <= 0) {
             emit(EVENT_NPC_DIED, npc);
           }

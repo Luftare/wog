@@ -3,7 +3,7 @@ const conf = {
     return 100 + level * 10;
   },
   levelToCreepDPS(level) {
-    return 250 + level;
+    return 10 + level;
   },
   levelToPlayerBaseDamage(level) {
     return 25 + level;
