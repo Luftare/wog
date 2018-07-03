@@ -9,7 +9,8 @@ import {
   EVENT_NPC_RECEIVE_DAMAGE,
   EVENT_NPC_HIT_PLAYER,
   EVENT_PLAYER_RECEIVE_DAMAGE,
-  EVENT_PLAYER_DIED
+  EVENT_PLAYER_DIED,
+  EVENT_PLAYER_RESPAWN
 } from "../constants";
 
 class PlayerStore {
@@ -43,6 +44,10 @@ class PlayerStore {
       if (this.hp <= 0) {
         emit(EVENT_PLAYER_DIED);
       }
+    });
+
+    on(EVENT_PLAYER_RESPAWN, () => {
+      this.hp = this.maxHp * 0.7;
     });
 
     this.hp = this.maxHp;
