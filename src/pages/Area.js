@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
-import emit from "../utils/emitter";
-import { EVENT_PLAYER_HIT_NPC } from "../constants";
+import { emit, on, off } from "../utils/eventBus";
+import { EVENT_PLAYER_HIT_NPC, EVENT_PLAYER_DIED } from "../constants";
 
 import PlayerStatus from "../components/PlayerStatus";
 import Npc from "../components/Npc";
@@ -18,11 +18,20 @@ const Container = styled.div`
 @inject("playerStore")
 @observer
 class Area extends Component {
+  playerDiedHandler = () => {
+    this.props.router.goTo("/graveyard");
+  };
+
   constructor(props) {
     super(props);
     const { areaStore, router } = this.props;
     areaStore.setArea(router.params.id);
     areaStore.createNpcs();
+    on(EVENT_PLAYER_DIED, this.playerDiedHandler);
+  }
+
+  componentWillUnmount() {
+    off(EVENT_PLAYER_DIED, this.playerDiedHandler);
   }
 
   componentWillUpdate() {

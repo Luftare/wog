@@ -1,7 +1,7 @@
 export default class {
-  constructor({ time, eventName, payload }) {
+  constructor({ time, eventName }) {
     setInterval(() => {
-      const e = new CustomEvent(eventName, { detail: payload });
+      const e = new CustomEvent(eventName, { detail: time });
       window.dispatchEvent(e);
     }, time);
   }

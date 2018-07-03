@@ -24,7 +24,10 @@ export default class Npc extends Component {
     return (
       <Container onMouseDown={this.props.onMouseDown} dead={npc.hp <= 0}>
         <HpBar ratio={hpRatio} />
-        <div>{npc.name}</div>
+        <div>
+          {npc.name} {npc.level}
+        </div>
+        <div>{npc.aggro ? "aggro" : null}</div>
       </Container>
     );
   }

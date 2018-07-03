@@ -1,12 +1,15 @@
 import { observable, action, computed } from "mobx";
 import stats from "../config/stats";
-import emit from "../utils/emitter";
+import { emit, on } from "../utils/eventBus";
 import {
   EVENT_NPC_DIED,
   EVENT_TICK,
   EVENT_PLAYER_LEVEL_UP,
   EVENT_PLAYER_HIT_NPC,
-  EVENT_NPC_RECEIVE_DAMAGE
+  EVENT_NPC_RECEIVE_DAMAGE,
+  EVENT_NPC_HIT_PLAYER,
+  EVENT_PLAYER_RECEIVE_DAMAGE,
+  EVENT_PLAYER_DIED
 } from "../constants";
 
 class PlayerStore {
@@ -17,17 +20,29 @@ class PlayerStore {
   constructor() {
     window.addEventListener(EVENT_TICK, () => {});
 
-    window.addEventListener(EVENT_NPC_DIED, ({ detail: npc }) => {
+    on(EVENT_NPC_DIED, npc => {
       const experience = stats.experienceFromNpcKillWithLevel(npc.level);
       this.handleExperienceGain(experience);
     });
 
-    window.addEventListener(EVENT_PLAYER_HIT_NPC, ({ detail: npc }) => {
+    on(EVENT_NPC_HIT_PLAYER, npc => {
+      const damage = stats.levelToCreepDPS(npc.level);
+      emit(EVENT_PLAYER_RECEIVE_DAMAGE, damage);
+    });
+
+    on(EVENT_PLAYER_HIT_NPC, npc => {
       const damage = this.meleeDamage;
       emit(EVENT_NPC_RECEIVE_DAMAGE, {
         npc,
         damage
       });
+    });
+
+    on(EVENT_PLAYER_RECEIVE_DAMAGE, damage => {
+      this.hp = Math.max(0, this.hp - damage);
+      if (this.hp <= 0) {
+        emit(EVENT_PLAYER_DIED);
+      }
     });
 
     this.hp = this.maxHp;

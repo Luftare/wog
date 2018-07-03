@@ -12,9 +12,8 @@ import Ticker from "./utils/Ticker";
 import { EVENT_TICK } from "./constants";
 
 new Ticker({
-  time: 1000,
-  eventName: EVENT_TICK,
-  payload: { frequency: 1000 }
+  time: 500,
+  eventName: EVENT_TICK
 });
 
 const Root = (

@@ -3,9 +3,12 @@ import areas from "../config/areas";
 import {
   EVENT_NPC_DIED,
   EVENT_NPC_RECEIVE_DAMAGE,
-  EVENT_TICK
+  EVENT_PLAYER_HIT_NPC,
+  EVENT_NPC_HIT_PLAYER,
+  EVENT_TICK,
+  EVENT_PLAYER_DIED
 } from "../constants";
-import emit from "../utils/emitter";
+import { emit, on } from "../utils/eventBus";
 
 class AreaStore {
   @observable npcs = [];
@@ -13,20 +16,43 @@ class AreaStore {
   @observable areaIndex = 0;
 
   constructor() {
-    window.addEventListener(EVENT_TICK, () => {});
+    on(EVENT_TICK, () => {});
 
-    window.addEventListener(EVENT_NPC_RECEIVE_DAMAGE, ({ detail: data }) => {
-      const { npc: targetNpc, damage } = data;
+    on(EVENT_PLAYER_HIT_NPC, npc => {
+      if (npc.aggro) return;
+      npc.aggro = true;
+      npc.hitIntervalId = setInterval(() => {
+        emit(EVENT_NPC_HIT_PLAYER, npc);
+      }, npc.hitIntervalTime);
+    });
+
+    on(EVENT_NPC_DIED, npc => {
+      clearInterval(npc.hitIntervalId);
+      npc.aggro = false;
+      setTimeout(() => {
+        this.respawnNewNpcAtExisting(npc);
+      }, 1000);
+    });
+
+    on(EVENT_NPC_RECEIVE_DAMAGE, ({ npc: targetNpc, damage }) => {
       this.npcs = this.npcs.map(npc => {
         if (npc === targetNpc) {
           npc.hp -= damage;
           if (npc.hp <= 0) {
-            this.handleNpcDeath(npc);
+            emit(EVENT_NPC_DIED, npc);
           }
           return npc;
         } else {
           return npc;
         }
+      });
+    });
+
+    on(EVENT_PLAYER_DIED, () => {
+      this.npcs = this.npcs.map(npc => {
+        npc.aggro = false;
+        clearInterval(npc.hitIntervalId);
+        return npc;
       });
     });
   }
@@ -57,15 +83,7 @@ class AreaStore {
   };
 
   @action
-  handleNpcDeath = npc => {
-    emit(EVENT_NPC_DIED, npc);
-    setTimeout(() => {
-      this.respawnNewNpc(npc);
-    }, 1000);
-  };
-
-  @action
-  respawnNewNpc(targetNpc) {
+  respawnNewNpcAtExisting(targetNpc) {
     this.npcs = this.npcs.map(npc => {
       if (npc === targetNpc) {
         return this.getRandomNewCreep();
