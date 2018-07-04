@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { emit } from "../utils/eventBus";
+import { EVENT_SHOW_LOOT } from "../constants";
 import HpBar from "./HpBar";
-import DroppedItems from "./DroppedItems";
 import FlyingMessage from "./FlyingMessage";
 
 const Container = styled.div`
@@ -17,7 +18,6 @@ const Container = styled.div`
     `
     cursor: default;
     background-color: grey;
-    pointer-events: none;
     transform: rotate(0deg);
   `};
 `;
@@ -26,8 +26,11 @@ export default class Npc extends Component {
   handleClick = () => {
     const { npc } = this.props;
     const isDead = npc.hp <= 0;
-    if (isDead) return;
-    this.props.onMouseDown();
+    if (!isDead) {
+      this.props.onMouseDown();
+    } else {
+      emit(EVENT_SHOW_LOOT, npc.items);
+    }
   };
 
   render() {
@@ -36,7 +39,6 @@ export default class Npc extends Component {
     const isDead = npc.hp <= 0;
     return (
       <Container onMouseDown={this.handleClick} dead={isDead}>
-        {isDead && <DroppedItems items={npc.items} />}
         <HpBar ratio={hpRatio} />
         <div>
           {npc.name} {npc.level}

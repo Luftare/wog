@@ -29,11 +29,11 @@ const Container = styled.div`
 @observer
 export default class Item extends Component {
   render() {
-    const { item } = this.props;
+    const { item, tooltipRight } = this.props;
 
     return (
       <Container onClick={() => emit(EVENT_ITEM_CLICK, item)}>
-        <Tooltip title={item.name} body={item.description} />
+        <Tooltip title={item.name} body={item.description} right={tooltipRight} />
         {item.name}
       </Container>
     );

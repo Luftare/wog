@@ -2,12 +2,18 @@ import { observable, action, computed } from "mobx";
 //import stats from "../config/stats";
 // import Item from "../models/Item";
 import { emit, on } from "../utils/eventBus";
-import { EVENT_TICK, EVENT_ITEM_CLICK, EVENT_LOOT_ITEM } from "../constants";
+import {
+  EVENT_TICK,
+  EVENT_ITEM_CLICK,
+  EVENT_LOOT_ITEM,
+  EVENT_SHOW_LOOT
+} from "../constants";
 
 class InventoryStore {
   @observable items = [];
-  @observable isOpen = true;
+  @observable isOpen = false;
   @observable inventorySize = 12;
+  @observable loot = [];
 
   constructor() {
     on(EVENT_TICK, () => {});
@@ -23,6 +29,11 @@ class InventoryStore {
 
     on(EVENT_LOOT_ITEM, item => {
       this.items = [...this.items, item];
+      this.loot = this.loot.filter(i => i !== item);
+    });
+
+    on(EVENT_SHOW_LOOT, items => {
+      this.loot = [...items];
     });
   }
 
@@ -39,6 +50,11 @@ class InventoryStore {
   @action
   toggleInventory = () => {
     this.isOpen = !this.isOpen;
+  };
+
+  @action
+  closeLoot = () => {
+    this.loot = [];
   };
 }
 

@@ -6,6 +6,7 @@ import { EVENT_PLAYER_HIT_NPC, EVENT_PLAYER_DIED } from "../constants";
 
 import PlayerStatus from "../components/PlayerStatus";
 import ActionBar from "../components/ActionBar";
+import DroppedItems from "../components/DroppedItems";
 import Npc from "../components/Npc";
 import NpcContainer from "../containers/NpcContainer";
 
@@ -20,6 +21,7 @@ const Container = styled.div`
 @inject("router")
 @inject("areaStore")
 @inject("playerStore")
+@inject("inventoryStore")
 @observer
 class Area extends Component {
   playerDiedHandler = () => {
@@ -47,10 +49,12 @@ class Area extends Component {
   }
 
   render() {
-    const { areaStore } = this.props;
+    const { areaStore, inventoryStore } = this.props;
+    const showLoot = inventoryStore.loot.length > 0;
     return (
       <Container>
         <PlayerStatus />
+        {showLoot && <DroppedItems />}
         <NpcContainer>
           {areaStore.npcs.map((npc, i) => (
             <Npc
