@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
-import HpBar from "./HpBar";
+import { emit, on, off } from "../utils/eventBus";
+import { EVENT_ITEM_CLICK } from "../constants";
+import Tooltip from "./Tooltip";
 
 const Container = styled.div`
+  position: relative;
   display: flex;
   width: 100%;
   height: 100%;
@@ -11,6 +14,15 @@ const Container = styled.div`
   align-items: center;
   background-color: orange;
   color: black;
+  cursor: pointer;
+  [class^="Tooltip"] {
+    display: none;
+  }
+  :hover {
+    [class^="Tooltip"] {
+      display: unset;
+    }
+  }
 `;
 
 @inject("playerStore")
@@ -19,6 +31,11 @@ export default class Item extends Component {
   render() {
     const { item } = this.props;
 
-    return <Container>{item.name}</Container>;
+    return (
+      <Container onClick={() => emit(EVENT_ITEM_CLICK, item)}>
+        <Tooltip title={item.name} body={item.description} />
+        {item.name}
+      </Container>
+    );
   }
 }
