@@ -4,6 +4,7 @@ import { inject, observer } from "mobx-react";
 import { emit } from "../utils/eventBus";
 import { EVENT_PLAYER_RESPAWN } from "../constants";
 import ExperienceBar from "./ExperienceBar";
+import Inventory from "./Inventory";
 import ActionBarButton from "./ActionBarButton";
 
 const Container = styled.div`
@@ -30,7 +31,12 @@ class ActionBar extends Component {
     return (
       <Container>
         <ExperienceBar />
-        <ActionBarButton onClick={inventoryStore.toggleInventory} active={inventoryStore.isOpen} text={"Bag"} />
+        <Inventory />
+        <ActionBarButton
+          onClick={inventoryStore.toggleInventory}
+          active={inventoryStore.isOpen}
+          text={"Bag"}
+        />
       </Container>
     );
   }

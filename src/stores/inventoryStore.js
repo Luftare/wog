@@ -6,7 +6,7 @@ import { EVENT_TICK } from "../constants";
 
 class InventoryStore {
   @observable
-  items = [...Array(12)].map((slot, i) => (i < 4 ? new Item() : slot));
+  slots = [...Array(12)].map((slot, i) => (i < 4 ? new Item() : slot));
   @observable isOpen = false;
 
   constructor() {
