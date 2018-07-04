@@ -8,5 +8,6 @@ export default class NPC {
     this.maxHp = hp;
     this.messages = [];
     this.messageFlushTimeoutId = null;
+    this.items = [];
   }
 }

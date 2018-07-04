@@ -8,7 +8,7 @@ const Container = styled.div`
   position: absolute;
   display: grid;
   grid-template-columns: repeat(4, 50px);
-  grid-template-rows: repeat(${props => props.rows}, 50px);
+  grid-template-rows: repeat(2, 50px);
   grid-gap: 8px;
   right: 0px;
   top: 0px;
@@ -16,15 +16,15 @@ const Container = styled.div`
   padding: 8px;
   box-sizing: border-box;
   background-color: grey;
+  pointer-events: all;
 `;
 
 export default class DroppedItems extends Component {
   render() {
     const { items, slots } = this.props;
-    const rows = Math.ceil(Math.slots / 4);
     return (
-      <Container rows={rows}>
-        {[...Array(slots || 8)].map(
+      <Container>
+        {[...Array(8)].map(
           (_, i) =>
             items[i] ? (
               <Item key={i} item={items[i]} />

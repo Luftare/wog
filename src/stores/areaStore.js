@@ -28,6 +28,7 @@ class AreaStore {
 
     on(EVENT_NPC_DIED, npc => {
       clearInterval(npc.hitIntervalId);
+      npc.items = this.generateLoot(npc);
       npc.aggro = false;
       setTimeout(() => {
         this.respawnNewNpcAtExisting(npc);
@@ -76,6 +77,13 @@ class AreaStore {
   @action
   createNpcs = () => {
     this.npcs = [...Array(this.area.npcCount)].map(this.getRandomNewCreep);
+  };
+
+  @action
+  generateLoot = npc => {
+    return this.area.drops
+      .filter(drop => Math.random() <= drop.dropRate)
+      .map(drop => new drop.item());
   };
 
   @action
