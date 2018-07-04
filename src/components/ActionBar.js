@@ -4,18 +4,20 @@ import { inject, observer } from "mobx-react";
 import { emit } from "../utils/eventBus";
 import { EVENT_PLAYER_RESPAWN } from "../constants";
 import ExperienceBar from "./ExperienceBar";
+import ActionBarButton from "./ActionBarButton";
 
 const Container = styled.div`
   position: relative;
   display: flex;
   width: 100%;
-  height: 100px;
   background: grey;
   box-sizing: border-box;
+  padding: 8px;
 `;
 
 @inject("playerStore")
 @inject("areaStore")
+@inject("inventoryStore")
 @inject("router")
 @observer
 class ActionBar extends Component {
@@ -24,9 +26,11 @@ class ActionBar extends Component {
   }
 
   render() {
+    const { inventoryStore } = this.props;
     return (
       <Container>
         <ExperienceBar />
+        <ActionBarButton onClick={inventoryStore.toggleInventory} active={inventoryStore.isOpen} text={"Bag"} />
       </Container>
     );
   }

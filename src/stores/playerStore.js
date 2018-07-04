@@ -20,7 +20,7 @@ class PlayerStore {
   @observable hp = 100;
 
   constructor() {
-    window.addEventListener(EVENT_TICK, () => {});
+    on(EVENT_TICK, () => {});
 
     on(EVENT_NPC_DIED, npc => {
       const experience = stats.experienceFromNpcKillWithLevel(npc.level);

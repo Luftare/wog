@@ -7,6 +7,7 @@ import routes from "./config/routes";
 import Router from "./stores/Router";
 import areaStore from "./stores/areaStore";
 import playerStore from "./stores/playerStore";
+import inventoryStore from "./stores/inventoryStore";
 import { Provider } from "mobx-react";
 import Ticker from "./utils/Ticker";
 import { EVENT_TICK } from "./constants";
@@ -20,6 +21,7 @@ const Root = (
   <Provider
     router={new Router(routes)}
     playerStore={playerStore}
+    inventoryStore={inventoryStore}
     areaStore={areaStore}
   >
     <RouterComponent />
