@@ -1,4 +1,4 @@
-import stats from "../../config/stats";
+//import stats from "../../config/stats";
 
 export default class Item {
   constructor() {

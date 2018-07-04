@@ -27,7 +27,7 @@ export default [
       {
         item: Item,
         dropRate: 0.5
-      },
+      }
     ]
   },
   {

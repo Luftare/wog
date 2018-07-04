@@ -47,7 +47,7 @@ class Area extends Component {
   }
 
   render() {
-    const { router, areaStore } = this.props;
+    const { areaStore } = this.props;
     return (
       <Container>
         <PlayerStatus />

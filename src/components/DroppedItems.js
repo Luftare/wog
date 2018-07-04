@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 import Item from "./Item";
 import EmptyInventorySlot from "./EmptyInventorySlot";
@@ -21,7 +20,7 @@ const Container = styled.div`
 
 export default class DroppedItems extends Component {
   render() {
-    const { items, slots } = this.props;
+    const { items } = this.props;
     return (
       <Container>
         {[...Array(8)].map(

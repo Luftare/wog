@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
-import { emit, on, off } from "../utils/eventBus";
+import { emit } from "../utils/eventBus";
 import { EVENT_ITEM_CLICK } from "../constants";
 import Tooltip from "./Tooltip";
 

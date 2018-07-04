@@ -6,7 +6,8 @@ import {
   EVENT_PLAYER_HIT_NPC,
   EVENT_NPC_HIT_PLAYER,
   EVENT_TICK,
-  EVENT_PLAYER_DIED
+  EVENT_PLAYER_DIED,
+  EVENT_LOOT_ITEM
 } from "../constants";
 import { emit, on } from "../utils/eventBus";
 
@@ -32,7 +33,7 @@ class AreaStore {
       npc.aggro = false;
       setTimeout(() => {
         this.respawnNewNpcAtExisting(npc);
-      }, 1000);
+      }, 10000);
     });
 
     on(EVENT_NPC_RECEIVE_DAMAGE, ({ npc: targetNpc, damage }) => {
@@ -61,6 +62,14 @@ class AreaStore {
         clearInterval(npc.hitIntervalId);
         return npc;
       });
+    });
+
+    on(EVENT_LOOT_ITEM, item => {
+      const npc = this.npcs.find(npc => npc.items.includes(item));
+      if (npc) {
+        npc.items = npc.items.filter(i => i !== item);
+        this.npcs = [...this.npcs];
+      }
     });
   }
 

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
-import { emit } from "../utils/eventBus";
-import { EVENT_PLAYER_RESPAWN } from "../constants";
 import ExperienceBar from "./ExperienceBar";
 import Inventory from "./Inventory";
 import ActionBarButton from "./ActionBarButton";
@@ -22,10 +20,6 @@ const Container = styled.div`
 @inject("router")
 @observer
 class ActionBar extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { inventoryStore } = this.props;
     return (
