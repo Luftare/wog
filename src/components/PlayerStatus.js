@@ -22,6 +22,7 @@ export default class PlayerStatus extends Component {
     return (
       <Container>
         <HpBar ratio={playerStore.hpRatio} />
+        <div>level {playerStore.level}</div>
       </Container>
     );
   }

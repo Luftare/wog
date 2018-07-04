@@ -16,7 +16,7 @@ import {
 class PlayerStore {
   @observable level = 1;
   @observable name = "Jeppe";
-  @observable experience = 0;
+  @observable experience = 90;
   @observable hp = 100;
 
   constructor() {
@@ -59,8 +59,8 @@ class PlayerStore {
     const experienceToNextLevel = stats.experienceToNextLevelAtLevel(
       this.level
     );
-    if (experience >= experienceToNextLevel) {
-      this.experience = experience - experienceToNextLevel;
+    if (this.experience + experience >= experienceToNextLevel) {
+      this.experience = this.experience + experience - experienceToNextLevel;
       this.levelUp();
     } else {
       this.experience += experience;
@@ -84,7 +84,7 @@ class PlayerStore {
   }
 
   @computed
-  get experienceProgress() {
+  get experienceRatio() {
     return this.experience / stats.experienceToNextLevelAtLevel(this.level);
   }
 

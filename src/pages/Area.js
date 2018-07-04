@@ -5,11 +5,15 @@ import { emit, on, off } from "../utils/eventBus";
 import { EVENT_PLAYER_HIT_NPC, EVENT_PLAYER_DIED } from "../constants";
 
 import PlayerStatus from "../components/PlayerStatus";
+import ActionBar from "../components/ActionBar";
 import Npc from "../components/Npc";
 import NpcContainer from "../containers/NpcContainer";
 
 const Container = styled.div`
   position: relative;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr auto;
   color: blue;
 `;
 
@@ -47,7 +51,6 @@ class Area extends Component {
     return (
       <Container>
         <PlayerStatus />
-        Area: {router.params.id}, Name: {areaStore.area.name}
         <NpcContainer>
           {areaStore.npcs.map((npc, i) => (
             <Npc
@@ -57,6 +60,7 @@ class Area extends Component {
             />
           ))}
         </NpcContainer>
+        <ActionBar />
       </Container>
     );
   }
