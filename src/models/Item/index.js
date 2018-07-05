@@ -1,8 +1,9 @@
 //import stats from "../../config/stats";
 
 export default class Item {
-  constructor() {
+  constructor(level) {
     this.name = "Item";
     this.description = `Items can do lots of interesting stuff. They increase player's power and may look cool.`;
+    this.level = Math.floor(level + Math.random() * 3);
   }
 }

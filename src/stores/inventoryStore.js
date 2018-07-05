@@ -1,4 +1,5 @@
 import { observable, action, computed } from "mobx";
+import Gold from "../models/Currency";
 //import stats from "../config/stats";
 // import Item from "../models/Item";
 import { emit, on } from "../utils/eventBus";
@@ -14,6 +15,7 @@ class InventoryStore {
   @observable isOpen = false;
   @observable inventorySize = 12;
   @observable loot = [];
+  @observable gold = 0;
 
   constructor() {
     on(EVENT_TICK, () => {});
@@ -28,8 +30,12 @@ class InventoryStore {
     });
 
     on(EVENT_LOOT_ITEM, item => {
-      this.items = [...this.items, item];
       this.loot = this.loot.map(i => (i !== item ? i : null));
+      if (item instanceof Gold) {
+        this.gold += item.amount;
+      } else {
+        this.items = [...this.items, item];
+      }
       if (this.allItemsLooted) this.closeLoot();
     });
 

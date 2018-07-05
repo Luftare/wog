@@ -1,5 +1,6 @@
 import Rat from "../../models/NPC/Rat";
 import Item from "../../models/Item";
+import Gold from "../../models/Currency";
 
 export default [
   {
@@ -9,24 +10,16 @@ export default [
     npcs: [Rat],
     drops: [
       {
-        item: Item,
-        dropRate: 0.5
+        item: Gold,
+        dropRate: 0.9
       },
       {
         item: Item,
-        dropRate: 0.5
+        dropRate: 0.2
       },
       {
         item: Item,
-        dropRate: 0.5
-      },
-      {
-        item: Item,
-        dropRate: 0.5
-      },
-      {
-        item: Item,
-        dropRate: 0.5
+        dropRate: 0.1
       }
     ]
   },

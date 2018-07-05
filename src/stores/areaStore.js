@@ -103,7 +103,7 @@ class AreaStore {
   generateLoot = npc => {
     return this.area.drops
       .filter(drop => Math.random() <= drop.dropRate)
-      .map(drop => new drop.item());
+      .map(drop => new drop.item(this.area.level));
   };
 
   @action

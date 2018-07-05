@@ -29,6 +29,17 @@ const Grid = styled.div`
   grid-gap: 8px;
 `;
 
+const Footer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+`;
+
+const Gold = styled.div`
+  color: orange;
+  font-weight: bold;
+`;
+
 @inject("playerStore")
 @inject("inventoryStore")
 @observer
@@ -50,6 +61,9 @@ export default class Inventory extends Component {
               )
           )}
         </Grid>
+        <Footer>
+          <Gold>Gold: {inventoryStore.gold}</Gold>
+        </Footer>
       </Container>
     );
   }
