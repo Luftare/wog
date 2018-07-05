@@ -42,6 +42,7 @@ const characterDeathAnimation = keyframes`
 `;
 
 const Character = styled.div`
+  position: relative;
   animation: ${characterArriveAnimation}
     ${() => Math.floor(Math.random() * 200 + 1000)}ms infinite linear;
   transform-origin: 50% 100%;
@@ -49,12 +50,12 @@ const Character = styled.div`
   width: 120px;
   height: 120px;
   border-radius: 120px;
-  background-image: url("https://orig00.deviantart.net/b956/f/2014/064/0/1/pixel_rat_by_studiofallen-d792ipt.png");
-  background-image-size: contain;
+  background-image: url("${props => props.image}");
+  background-size: contain;
   background-image-position: center;
   border: 2px solid transparent;
   box-sizing: border-box;
-  transition: all 200ms;
+  transition: all 100ms;
   ${props =>
     props.dead &&
     `
@@ -64,8 +65,30 @@ const Character = styled.div`
     transform: rotateZ(90deg);
   `};
   :hover {
-    border-color: red;
+    box-shadow: 0 0 25px red;
   }
+  :active {
+    ${props =>
+      !props.dead &&
+      `
+      background-color: rgba(255, 0, 0, 1);
+      animation: none;
+      transform: scale(0.95, 0.95);
+    `};
+  }
+  ${props =>
+    props.aggro
+      ? `
+    box-shadow: 0 0 25px red;
+  `
+      : ""}
+`;
+
+const Shine = styled.img.attrs({
+  src: "https://media.giphy.com/media/3IcbXNHDIZQRy/giphy.gif"
+})`
+  width: 100%;
+  pointer-events: none;
 `;
 
 const TopBar = styled.div`
@@ -77,7 +100,7 @@ const TopBar = styled.div`
   ${props =>
     props.hidden
       ? `
-    transition: all 200ms 500ms;
+    transition: all 150ms 550ms;
     opacity: 0;
   `
       : ""};
@@ -116,7 +139,14 @@ export default class Npc extends Component {
           <HpBar ratio={hpRatio} />
           <Level>{npc.level}</Level>
         </TopBar>
-        <Character dead={isDead} noLoot={noLoot} image={npc.image} />
+        <Character
+          dead={isDead}
+          noLoot={noLoot}
+          image={npc.image}
+          aggro={npc.aggro}
+        >
+          {isDead && !noLoot && <Shine />}
+        </Character>
         {npc.messages.map((message, i) => (
           <FlyingMessage left={`${Math.floor(Math.random() * 100)}%`} key={i}>
             {message.value}

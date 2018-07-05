@@ -4,6 +4,6 @@ export default class Rat extends Creep {
   constructor(props) {
     super(props);
     this.name = "Rat";
-    this.image = "http://pixelartmaker.com/art/2d5cb2996537154.png";
+    this.image = "https://orig00.deviantart.net/b956/f/2014/064/0/1/pixel_rat_by_studiofallen-d792ipt.png";
   }
 }
