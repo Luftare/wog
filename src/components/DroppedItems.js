@@ -52,8 +52,12 @@ export default class DroppedItems extends Component {
         </Header>
         {loot.map((item, i) => (
           <ItemRow>
-            <Item key={i} item={item} tooltipRight />
-            <ItemName>{item.name}</ItemName>
+            {item ? (
+              <Item key={i} item={item} tooltipRight />
+            ) : (
+              <EmptyInventorySlot key={i} />
+            )}
+            <ItemName>{item && item.name}</ItemName>
           </ItemRow>
         ))}
       </Container>

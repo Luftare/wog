@@ -67,7 +67,7 @@ class AreaStore {
     on(EVENT_LOOT_ITEM, item => {
       const npc = this.npcs.find(npc => npc.items.includes(item));
       if (npc) {
-        npc.items = npc.items.filter(i => i !== item);
+        npc.items = npc.items.map(i => (i !== item ? i : null));
         this.npcs = [...this.npcs];
       }
     });

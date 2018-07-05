@@ -1,7 +1,7 @@
 import { observable, action, computed } from "mobx";
 //import stats from "../config/stats";
 // import Item from "../models/Item";
-import { emit, on } from "../utils/eventBus";
+import { emit, on, off } from "../utils/eventBus";
 import {
   EVENT_TICK,
   EVENT_ITEM_CLICK,
@@ -29,7 +29,7 @@ class InventoryStore {
 
     on(EVENT_LOOT_ITEM, item => {
       this.items = [...this.items, item];
-      this.loot = this.loot.filter(i => i !== item);
+      this.loot = this.loot.map(i => (i !== item ? i : null));
     });
 
     on(EVENT_SHOW_LOOT, items => {
@@ -50,6 +50,11 @@ class InventoryStore {
   @action
   toggleInventory = () => {
     this.isOpen = !this.isOpen;
+  };
+
+  @action
+  closeInventory = () => {
+    this.isOpen = false;
   };
 
   @action

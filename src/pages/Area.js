@@ -24,20 +24,31 @@ const Container = styled.div`
 @inject("inventoryStore")
 @observer
 class Area extends Component {
-  playerDiedHandler = () => {
+  handlePlayerDeath = () => {
     this.props.router.goTo("/graveyard");
+  };
+
+  closeModals = () => {
+    const { inventoryStore } = this.props;
+    inventoryStore.closeLoot();
+    inventoryStore.closeInventory();
   };
 
   constructor(props) {
     super(props);
-    const { areaStore, router } = this.props;
+    const { areaStore, inventoryStore, router } = this.props;
     areaStore.setArea(router.params.id);
     areaStore.createNpcs();
-    on(EVENT_PLAYER_DIED, this.playerDiedHandler);
+    on(EVENT_PLAYER_DIED, this.handlePlayerDeath);
+    on.key("Escape", this.closeModals);
+    on.key("b", inventoryStore.toggleInventory);
   }
 
   componentWillUnmount() {
-    off(EVENT_PLAYER_DIED, this.playerDiedHandler);
+    const { inventoryStore } = this.props;
+    off(EVENT_PLAYER_DIED, this.handlePlayerDeath);
+    off.key("Escape", this.closeModals);
+    off.key("b", inventoryStore.toggleInventory);
   }
 
   componentWillUpdate() {
