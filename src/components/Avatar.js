@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import FlyingMessage from "./FlyingMessage";
 
 const Container = styled.div`
   position: relative;
@@ -32,9 +33,19 @@ const Level = styled.div`
 
 export default class Avatar extends Component {
   render() {
-    const { level, avatar } = this.props;
+    const { level, avatar, messages } = this.props;
     return (
       <Container image={avatar}>
+        {messages.map((msg, i) => (
+          <FlyingMessage
+            key={i}
+            left={`${Math.floor(Math.random() * 100)}%`}
+            top={"50%"}
+            color={"red"}
+          >
+            {msg.value}
+          </FlyingMessage>
+        ))}
         <Level>{level}</Level>
       </Container>
     );

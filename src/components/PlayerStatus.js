@@ -30,7 +30,11 @@ export default class PlayerStatus extends Component {
 
     return (
       <Container>
-        <Avatar level={playerStore.level} avatar={playerStore.avatar}/>
+        <Avatar
+          level={playerStore.level}
+          avatar={playerStore.avatar}
+          messages={playerStore.messages}
+        />
         <SecondaryContainer>
           <Name>{playerStore.name}</Name>
           <HpBar ratio={playerStore.hpRatio} />

@@ -164,7 +164,11 @@ export default class Npc extends Component {
           {isDead && !noLoot && <Shine />}
         </Character>
         {npc.messages.map((message, i) => (
-          <FlyingMessage left={`${Math.floor(Math.random() * 100)}%`} key={i}>
+          <FlyingMessage
+            left={`${Math.floor(Math.random() * 100)}%`}
+            top={"50%"}
+            key={i}
+          >
             {message.value}
           </FlyingMessage>
         ))}

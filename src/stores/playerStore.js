@@ -18,6 +18,8 @@ class PlayerStore {
   @observable name = "Jeppe";
   @observable experience = 90;
   @observable hp = 100;
+  @observable messages = [];
+  @observable messageFlushTimeoutId = null;
   @observable avatar = "http://pixelartmaker.com/art/951833d1834e60c.png";
 
   constructor() {
@@ -46,6 +48,11 @@ class PlayerStore {
       if (this.hp <= 0) {
         emit(EVENT_PLAYER_DIED);
       }
+      this.messages = [...this.messages, { value: damage }];
+      clearTimeout(this.messageFlushTimeoutId);
+      this.messageFlushTimeoutId = setTimeout(() => {
+        this.messages = [];
+      }, 5000);
     });
 
     on(EVENT_PLAYER_RESPAWN, () => {
