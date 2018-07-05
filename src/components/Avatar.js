@@ -8,6 +8,11 @@ const Container = styled.div`
   width: 80px;
   border-radius: 80px;
   background-color: grey;
+  background-image: url("${props => props.image}");
+  background-size: contain;
+  background-image-position: center;
+  background-repeat: no-repeat;
+  background-image-position: center;
   cursor: pointer;
 `;
 
@@ -27,9 +32,9 @@ const Level = styled.div`
 
 export default class Avatar extends Component {
   render() {
-    const { level } = this.props;
+    const { level, avatar } = this.props;
     return (
-      <Container>
+      <Container image={avatar}>
         <Level>{level}</Level>
       </Container>
     );

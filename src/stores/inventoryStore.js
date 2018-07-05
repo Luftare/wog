@@ -30,6 +30,7 @@ class InventoryStore {
     on(EVENT_LOOT_ITEM, item => {
       this.items = [...this.items, item];
       this.loot = this.loot.map(i => (i !== item ? i : null));
+      if(this.allItemsLooted) this.closeLoot();
     });
 
     on(EVENT_SHOW_LOOT, items => {
@@ -45,6 +46,11 @@ class InventoryStore {
   @computed
   get slots() {
     return [...this.items, ...Array(this.inventorySize - this.items.length)];
+  }
+
+  @computed
+  get allItemsLooted() {
+    return this.loot.length > 0 && !this.loot.find(item => !!item);
   }
 
   @action

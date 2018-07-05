@@ -31,7 +31,7 @@ const characterAttackAnimation = keyframes`
     transform: scale(1, 1);
   }
   30% {
-    transform: scale(1.2, 1.2) rotateZ(20deg);
+    transform: scale(1.2, 1.2) rotateZ(-10deg);
     background-color: red;
   }
 `;
@@ -63,6 +63,7 @@ const Character = styled.div`
   background-image: url("${props => props.image}");
   background-size: contain;
   background-image-position: center;
+  background-repeat: no-repeat;
   border: 2px solid transparent;
   box-sizing: border-box;
   transition: all 100ms;
@@ -81,7 +82,7 @@ const Character = styled.div`
     ${props =>
       !props.dead &&
       `
-      background-color: rgba(255, 0, 0, 1);
+      background-color: rgba(255, 0, 0, 0.2);
       animation: none;
       transform: scale(0.95, 0.95);
     `};
@@ -90,11 +91,21 @@ const Character = styled.div`
   ${props => props.hitting && `animation: ${characterAttackAnimation} 200ms;`}
 `;
 
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
 const Shine = styled.img.attrs({
   src: "https://media.giphy.com/media/3IcbXNHDIZQRy/giphy.gif"
 })`
   width: 100%;
   pointer-events: none;
+  animation: ${fadeIn} 5000ms;
 `;
 
 const TopBar = styled.div`
@@ -123,13 +134,11 @@ const Level = styled.div`
 export default class Npc extends Component {
   handleClick = e => {
     e.preventDefault();
-    const isRightClick = e.nativeEvent.which === 3;
-    const isLeftClick = e.nativeEvent.which === 1;
     const { npc } = this.props;
     const isDead = npc.hp <= 0;
-    if (!isDead && isLeftClick) {
+    if (!isDead) {
       this.props.onMouseDown();
-    } else if (isRightClick) {
+    } else {
       emit(EVENT_SHOW_LOOT, npc.items);
     }
   };

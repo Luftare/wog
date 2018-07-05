@@ -18,6 +18,7 @@ class PlayerStore {
   @observable name = "Jeppe";
   @observable experience = 90;
   @observable hp = 100;
+  @observable avatar = "http://pixelartmaker.com/art/951833d1834e60c.png";
 
   constructor() {
     on(EVENT_TICK, () => {});
