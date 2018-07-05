@@ -22,7 +22,7 @@ const characterArriveAnimation = keyframes`
     transform: scale(1, 1);
   }
   50% {
-    transform: scale(1, 0.9);
+    transform: scale(1, 0.95);
   }
 `;
 
@@ -42,21 +42,30 @@ const characterDeathAnimation = keyframes`
 `;
 
 const Character = styled.div`
-  animation: ${characterArriveAnimation} 1200ms infinite linear;
+  animation: ${characterArriveAnimation}
+    ${() => Math.floor(Math.random() * 200 + 1000)}ms infinite linear;
   transform-origin: 50% 100%;
   display: block;
-  width: 100px;
+  width: 120px;
   height: 120px;
-  background-color: lightblue;
+  border-radius: 120px;
+  background-image: url("https://orig00.deviantart.net/b956/f/2014/064/0/1/pixel_rat_by_studiofallen-d792ipt.png");
+  background-image-size: contain;
+  background-image-position: center;
+  border: 2px solid transparent;
+  box-sizing: border-box;
   transition: all 200ms;
   ${props =>
     props.dead &&
     `
     animation: ${characterDeathAnimation} 600ms
     transform-origin: 50% 50%;
-    ${props.noLoot ? "filter: grayscale(100%);" : ""}
+    ${props.noLoot ? "opacity: 0.5;" : ""}
     transform: rotateZ(90deg);
   `};
+  :hover {
+    border-color: red;
+  }
 `;
 
 const TopBar = styled.div`
@@ -107,7 +116,7 @@ export default class Npc extends Component {
           <HpBar ratio={hpRatio} />
           <Level>{npc.level}</Level>
         </TopBar>
-        <Character dead={isDead} noLoot={noLoot} />
+        <Character dead={isDead} noLoot={noLoot} image={npc.image} />
         {npc.messages.map((message, i) => (
           <FlyingMessage left={`${Math.floor(Math.random() * 100)}%`} key={i}>
             {message.value}

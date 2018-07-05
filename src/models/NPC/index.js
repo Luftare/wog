@@ -9,5 +9,6 @@ export default class NPC {
     this.messages = [];
     this.messageFlushTimeoutId = null;
     this.items = [];
+    this.image = "";
   }
 }
