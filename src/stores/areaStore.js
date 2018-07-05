@@ -23,7 +23,7 @@ class AreaStore {
       if (npc.aggro) return;
       npc.aggro = true;
       npc.hitIntervalId = setInterval(() => {
-        emit(EVENT_NPC_HIT_PLAYER, npc);
+        this.handleNpcHittingPlayer(npc);
       }, npc.hitIntervalTime);
     });
 
@@ -77,6 +77,17 @@ class AreaStore {
   get area() {
     return areas[this.areaIndex];
   }
+
+  @action
+  handleNpcHittingPlayer = npc => {
+    emit(EVENT_NPC_HIT_PLAYER, npc);
+    npc.hitting = true;
+    this.npcs = [...this.npcs];
+    setTimeout(() => {
+      npc.hitting = false;
+      this.npcs = [...this.npcs];
+    }, 700);
+  };
 
   @action
   setArea = areaIndex => {

@@ -6,6 +6,7 @@ export default class NPC {
     this.level = level;
     this.hp = hp;
     this.maxHp = hp;
+    this.hitting = false;
     this.messages = [];
     this.messageFlushTimeoutId = null;
     this.items = [];

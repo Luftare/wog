@@ -26,6 +26,16 @@ const characterArriveAnimation = keyframes`
   }
 `;
 
+const characterAttackAnimation = keyframes`
+  0%, 100% {
+    transform: scale(1, 1);
+  }
+  30% {
+    transform: scale(1.2, 1.2) rotateZ(20deg);
+    background-color: red;
+  }
+`;
+
 const characterDeathAnimation = keyframes`
   0% {
     transform: rotateZ(0);
@@ -76,12 +86,8 @@ const Character = styled.div`
       transform: scale(0.95, 0.95);
     `};
   }
-  ${props =>
-    props.aggro
-      ? `
-    box-shadow: 0 0 25px red;
-  `
-      : ""}
+  ${props => props.aggro && "box-shadow: 0 0 25px red;"}
+  ${props => props.hitting && `animation: ${characterAttackAnimation} 200ms;`}
 `;
 
 const Shine = styled.img.attrs({
@@ -144,6 +150,7 @@ export default class Npc extends Component {
           noLoot={noLoot}
           image={npc.image}
           aggro={npc.aggro}
+          hitting={npc.hitting}
         >
           {isDead && !noLoot && <Shine />}
         </Character>
