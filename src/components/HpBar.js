@@ -11,7 +11,7 @@ const Bar = styled.div`
   display: block;
   background-color: green;
   height: 100%;
-  transition: all 100ms;
+  transition: all 200ms;
   width: ${props => Math.min(100, Math.max(0, props.ratio * 100))}%;
 `;
 

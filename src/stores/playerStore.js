@@ -1,5 +1,6 @@
 import { observable, action, computed } from "mobx";
 import stats from "../config/stats";
+import areaStore from "./areaStore";
 import { emit, on } from "../utils/eventBus";
 import {
   EVENT_NPC_DIED,
@@ -23,7 +24,11 @@ class PlayerStore {
   @observable avatar = "http://pixelartmaker.com/art/951833d1834e60c.png";
 
   constructor() {
-    on(EVENT_TICK, () => {});
+    on(EVENT_TICK, dt => {
+      if (!this.inFight) {
+        this.hp = Math.min(this.maxHp, this.hp + stats.levelToPlayerHpRegeneration(this.level) * dt);
+      }
+    });
 
     on(EVENT_NPC_DIED, npc => {
       const experience = stats.experienceFromNpcKillWithLevel(npc.level);
@@ -80,6 +85,11 @@ class PlayerStore {
     this.level += 1;
     emit(EVENT_PLAYER_LEVEL_UP, this.level);
   };
+
+  @computed
+  get inFight() {
+    return !!areaStore.npcs.find(npc => npc.aggro);
+  }
 
   @computed
   get maxHp() {

@@ -15,6 +15,7 @@ const Container = styled.div`
   background-repeat: no-repeat;
   background-image-position: center;
   cursor: pointer;
+  box-shadow: ${props => (props.inFight ? "inset 0 0 25px red" : "none")};
 `;
 
 const Level = styled.div`
@@ -33,9 +34,9 @@ const Level = styled.div`
 
 export default class Avatar extends Component {
   render() {
-    const { level, avatar, messages } = this.props;
+    const { level, avatar, inFight, messages } = this.props;
     return (
-      <Container image={avatar}>
+      <Container image={avatar} inFight={inFight}>
         {messages.map((msg, i) => (
           <FlyingMessage
             key={i}

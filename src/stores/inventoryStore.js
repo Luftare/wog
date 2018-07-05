@@ -30,7 +30,7 @@ class InventoryStore {
     on(EVENT_LOOT_ITEM, item => {
       this.items = [...this.items, item];
       this.loot = this.loot.map(i => (i !== item ? i : null));
-      if(this.allItemsLooted) this.closeLoot();
+      if (this.allItemsLooted) this.closeLoot();
     });
 
     on(EVENT_SHOW_LOOT, items => {

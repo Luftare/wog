@@ -16,6 +16,9 @@ const conf = {
   },
   experienceFromNpcKillWithLevel(level) {
     return 50 + level * 2;
+  },
+  levelToPlayerHpRegeneration(level) {
+    return 1 + level * 0.1;
   }
 };
 

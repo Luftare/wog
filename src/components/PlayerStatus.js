@@ -34,6 +34,7 @@ export default class PlayerStatus extends Component {
           level={playerStore.level}
           avatar={playerStore.avatar}
           messages={playerStore.messages}
+          inFight={playerStore.inFight}
         />
         <SecondaryContainer>
           <Name>{playerStore.name}</Name>
