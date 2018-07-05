@@ -33,7 +33,11 @@ export default class Item extends Component {
 
     return (
       <Container onClick={() => emit(EVENT_ITEM_CLICK, item)}>
-        <Tooltip title={item.name} body={item.description} right={tooltipRight} />
+        <Tooltip
+          title={item.name}
+          body={item.description}
+          right={tooltipRight}
+        />
         {item.name}
       </Container>
     );

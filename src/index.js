@@ -17,6 +17,8 @@ new Ticker({
   eventName: EVENT_TICK
 });
 
+document.addEventListener("contextmenu", e => e.preventDefault());
+
 const Root = (
   <Provider
     router={new Router(routes)}

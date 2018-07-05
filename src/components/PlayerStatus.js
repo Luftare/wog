@@ -2,15 +2,24 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import HpBar from "./HpBar";
+import Avatar from "./Avatar";
 
 const Container = styled.div`
   position: absolute;
   left: 32px;
   top: 32px;
-  display: block;
-  width: 100px;
-  height: 100px;
-  background-color: grey;
+  display: flex;
+`;
+
+const SecondaryContainer = styled.div`
+  width: 110px;
+`;
+
+const Name = styled.div`
+  display: flex;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
 `;
 
 @inject("playerStore")
@@ -21,8 +30,11 @@ export default class PlayerStatus extends Component {
 
     return (
       <Container>
-        <HpBar ratio={playerStore.hpRatio} />
-        <div>level {playerStore.level}</div>
+        <Avatar level={playerStore.level} />
+        <SecondaryContainer>
+          <Name>{playerStore.name}</Name>
+          <HpBar ratio={playerStore.hpRatio} />
+        </SecondaryContainer>
       </Container>
     );
   }

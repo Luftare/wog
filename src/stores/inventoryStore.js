@@ -1,7 +1,7 @@
 import { observable, action, computed } from "mobx";
 //import stats from "../config/stats";
 // import Item from "../models/Item";
-import { emit, on, off } from "../utils/eventBus";
+import { emit, on } from "../utils/eventBus";
 import {
   EVENT_TICK,
   EVENT_ITEM_CLICK,
