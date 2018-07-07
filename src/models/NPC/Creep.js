@@ -7,4 +7,8 @@ export default class Creep extends NPC {
     this.hitIntervalTime = 2000;
     this.hitIntervalId = null;
   }
+
+  stop() {
+    clearInterval(this.hitIntervalId);
+  }
 }

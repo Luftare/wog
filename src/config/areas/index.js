@@ -27,6 +27,20 @@ export default [
     name: "Farms",
     level: 4,
     npcCount: 2,
-    npcs: [Rat]
+    npcs: [Rat],
+    drops: [
+      {
+        item: Gold,
+        dropRate: 0.9
+      },
+      {
+        item: Item,
+        dropRate: 0.2
+      },
+      {
+        item: Item,
+        dropRate: 0.1
+      }
+    ]
   }
 ];

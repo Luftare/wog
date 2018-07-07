@@ -3,14 +3,10 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import RouterComponent from "./components/Router";
 import registerServiceWorker from "./registerServiceWorker";
-import routes from "./config/routes";
-import Router from "./stores/Router";
-import areaStore from "./stores/areaStore";
-import playerStore from "./stores/playerStore";
-import inventoryStore from "./stores/inventoryStore";
 import { Provider } from "mobx-react";
 import Ticker from "./utils/Ticker";
 import { EVENT_TICK } from "./constants";
+import stores from "./stores";
 
 new Ticker({
   time: 500,
@@ -21,10 +17,12 @@ document.addEventListener("contextmenu", e => e.preventDefault());
 
 const Root = (
   <Provider
-    router={new Router(routes)}
-    playerStore={playerStore}
-    inventoryStore={inventoryStore}
-    areaStore={areaStore}
+    router={stores.router}
+    playerStore={stores.player}
+    inventoryStore={stores.inventory}
+    areaStore={stores.area}
+    mapStore={stores.map}
+    root={stores}
   >
     <RouterComponent />
   </Provider>

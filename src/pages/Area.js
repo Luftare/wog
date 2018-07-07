@@ -5,6 +5,7 @@ import { emit, on, off } from "../utils/eventBus";
 import { EVENT_PLAYER_HIT_NPC, EVENT_PLAYER_DIED } from "../constants";
 
 import PlayerStatus from "../components/PlayerStatus";
+import AreasMap from "../components/AreasMap";
 import ActionBar from "../components/ActionBar";
 import DroppedItems from "../components/DroppedItems";
 import Npc from "../components/Npc";
@@ -20,6 +21,7 @@ const Container = styled.div`
 @inject("router")
 @inject("areaStore")
 @inject("playerStore")
+@inject("mapStore")
 @inject("inventoryStore")
 @observer
 class Area extends Component {
@@ -33,21 +35,22 @@ class Area extends Component {
     inventoryStore.closeInventory();
   };
 
-  constructor(props) {
-    super(props);
-    const { areaStore, inventoryStore, router } = this.props;
+  componentDidMount() {
+    const { areaStore, inventoryStore, router, mapStore } = this.props;
     areaStore.setArea(router.params.id);
     areaStore.createNpcs();
     on(EVENT_PLAYER_DIED, this.handlePlayerDeath);
     on.key("Escape", this.closeModals);
     on.key("b", inventoryStore.toggleInventory);
+    on.key("m", mapStore.toggleMap);
   }
 
   componentWillUnmount() {
-    const { inventoryStore } = this.props;
+    const { inventoryStore, mapStore, areaStore } = this.props;
     off(EVENT_PLAYER_DIED, this.handlePlayerDeath);
     off.key("Escape", this.closeModals);
     off.key("b", inventoryStore.toggleInventory);
+    off.key("m", mapStore.toggleMap);
   }
 
   componentWillUpdate() {
@@ -63,6 +66,7 @@ class Area extends Component {
     const showLoot = inventoryStore.loot.length > 0;
     return (
       <Container>
+        <AreasMap />
         <PlayerStatus />
         {showLoot && <DroppedItems />}
         <NpcContainer>

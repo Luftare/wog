@@ -96,6 +96,7 @@ class AreaStore {
 
   @action
   createNpcs = () => {
+    this.npcs.forEach(npc => npc.stop());
     this.npcs = [...Array(this.area.npcCount)].map(this.getRandomNewCreep);
   };
 
