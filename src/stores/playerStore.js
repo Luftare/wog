@@ -22,11 +22,15 @@ class PlayerStore {
   @observable messages = [];
   @observable messageFlushTimeoutId = null;
   @observable avatar = "http://pixelartmaker.com/art/951833d1834e60c.png";
+  @observable profileIsOpen = false;
 
   constructor() {
     on(EVENT_TICK, dt => {
       if (!this.inFight) {
-        this.hp = Math.min(this.maxHp, this.hp + stats.levelToPlayerHpRegeneration(this.level) * dt);
+        this.hp = Math.min(
+          this.maxHp,
+          this.hp + stats.levelToPlayerHpRegeneration(this.level) * dt
+        );
       }
     });
 
@@ -65,6 +69,11 @@ class PlayerStore {
     });
 
     this.hp = this.maxHp;
+  }
+
+  @action
+  toggleProfile = () => {
+    this.profileIsOpen = !this.profileIsOpen;
   }
 
   @action

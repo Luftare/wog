@@ -12,4 +12,8 @@ export default class NPC {
     this.items = [];
     this.image = "";
   }
+
+  stop() {
+
+  }
 }
