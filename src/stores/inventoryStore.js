@@ -34,7 +34,7 @@ class InventoryStore {
         if (item.slot) {
           this.equipItem(item);
         }
-      } else if (!this.inventoryIsFull) {
+      } else if (!this.inventoryIsFull || item instanceof Gold) {
         emit(EVENT_LOOT_ITEM, item);
       }
     });
@@ -73,7 +73,7 @@ class InventoryStore {
 
   @computed
   get inventoryIsFull() {
-    return this.items.length >= this.inventorySize;
+    return this.notEquippedItems.length >= this.inventorySize;
   }
 
   @computed
