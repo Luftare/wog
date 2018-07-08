@@ -22,7 +22,7 @@ const Root = (
     inventoryStore={stores.inventory}
     areaStore={stores.area}
     mapStore={stores.map}
-    root={stores}
+    rootStore={stores}
   >
     <RouterComponent />
   </Provider>

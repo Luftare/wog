@@ -13,23 +13,17 @@ const Container = styled.div`
 @inject("playerStore")
 @inject("mapStore")
 @inject("router")
+@inject("rootStore")
 @observer
 class Town extends Component {
-  closeModals = () => {
-    const { mapStore } = this.props;
-    if (mapStore.isOpen) mapStore.toggleMap();
-  };
-
   componentDidMount(props) {
-    const { mapStore } = this.props;
-    on.key("m", mapStore.toggleMap);
-    on.key("Escape", this.closeModals);
+    const { rootStore } = this.props;
+    on.key("Escape", rootStore.closeAllModals);
   }
 
   componentWillUnmount() {
-    const { mapStore } = this.props;
-    off.key("m", mapStore.toggleMap);
-    off.key("Escape", this.closeModals);
+    const { rootStore } = this.props;
+    off.key("Escape", rootStore.closeAllModals);
   }
 
   render() {
@@ -37,8 +31,8 @@ class Town extends Component {
     return (
       <Container>
         <PlayerProfile />
-        <h1>Town</h1>
         <AreasMap />
+        <h1>Town</h1>
       </Container>
     );
   }

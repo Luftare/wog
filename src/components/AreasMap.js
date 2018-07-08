@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
+import { on, off } from "../utils/eventBus";
 import areas from "../config/areas";
 
 const Container = styled.div`
@@ -28,6 +29,16 @@ const Area = styled.a`
 @inject("mapStore")
 @observer
 export default class AreasMap extends Component {
+  componentDidMount() {
+    const { mapStore } = this.props;
+    on.key("m", mapStore.toggleMap);
+  }
+
+  componentWillUnmount() {
+    const { mapStore } = this.props;
+    off.key("m", mapStore.toggleMap);
+  }
+
   render() {
     const { isOpen, toggleMap } = this.props.mapStore;
 

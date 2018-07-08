@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
+import { on, off } from "../utils/eventBus";
 import styled from "styled-components";
 import Item from "./Item";
 import EmptyInventorySlot from "./EmptyInventorySlot";
@@ -44,6 +45,16 @@ const Gold = styled.div`
 @inject("inventoryStore")
 @observer
 export default class Inventory extends Component {
+  componentDidMount() {
+    const { inventoryStore } = this.props;
+    on.key("b", inventoryStore.toggleInventory);
+  }
+
+  componentWillUnmount() {
+    const { inventoryStore } = this.props;
+    off.key("b", inventoryStore.toggleInventory);
+  }
+
   render() {
     const { inventoryStore } = this.props;
     return (
