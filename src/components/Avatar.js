@@ -28,7 +28,7 @@ const Level = styled.div`
   width: 25px;
   height: 25px;
   border-radius: 25px;
-  background-color: black;
+  background-color: ${props => props.theme.black};
   color: yellow;
   font-weight: bold;
 `;
@@ -41,9 +41,10 @@ export default class Avatar extends Component {
         {messages.map((msg, i) => (
           <FlyingMessage
             key={i}
-            left={`${Math.floor(Math.random() * 100)}%`}
+            left={`50%`}
             top={"50%"}
-            color={"red"}
+            color={msg.color}
+            big={msg.big}
           >
             {msg.value}
           </FlyingMessage>

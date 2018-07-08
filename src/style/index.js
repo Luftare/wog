@@ -21,9 +21,12 @@ export const theme = {
   white: "#fff",
   black: "#222",
   grey: "#777",
+  orange: "#fa3",
   shadow: "1px 1px 4px rgba(0, 0, 0, 0.5)",
   smoke: "rgba(50, 50, 50, 0.7)",
+  lightSmoke: "rgba(50, 50, 50, 0.3)",
   red: "#e44",
+  lightBlue: "#9af",
   green: "#2e4",
   gutter: {
     m: "32px",

@@ -1,5 +1,6 @@
 import { observable, action, computed } from "mobx";
 import stats from "../config/stats";
+import { theme } from "../style";
 import areaStore from "./areaStore";
 import { emit, on } from "../utils/eventBus";
 import rootStore from "./index";
@@ -39,6 +40,12 @@ class PlayerStore {
     on(EVENT_NPC_DIED, npc => {
       const experience = stats.experienceFromNpcKillWithLevel(npc.level);
       this.handleExperienceGain(experience);
+      setTimeout(() => {
+        npc.messages.push({
+          value: `+${experience}exp`,
+          color: theme.lightBlue
+        });
+      }, 100);
     });
 
     on(EVENT_NPC_HIT_PLAYER, npc => {
@@ -95,6 +102,11 @@ class PlayerStore {
   levelUp = () => {
     this.level += 1;
     emit(EVENT_PLAYER_LEVEL_UP, this.level);
+    this.messages.push({
+      value: `Level Up!`,
+      color: theme.yellow,
+      big: true
+    });
   };
 
   @computed

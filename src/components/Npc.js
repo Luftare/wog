@@ -130,12 +130,15 @@ const Level = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${props => props.theme.smoke};
+  background-color: ${props => props.theme.black};
   color: ${props => props.color};
   font-weight: bold;
+  border-radius: 8px;
+  font-size: 12px;
 `;
 
 @inject("playerStore")
+@inject("router")
 @observer
 export default class Npc extends Component {
   handleClick = e => {
@@ -173,9 +176,11 @@ export default class Npc extends Component {
         </Character>
         {npc.messages.map((message, i) => (
           <FlyingMessage
-            left={`${Math.floor(Math.random() * 100)}%`}
+            left={`50%`}
             top={"50%"}
             key={i}
+            color={message.color}
+            big={message.big}
           >
             {message.value}
           </FlyingMessage>

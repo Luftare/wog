@@ -9,6 +9,7 @@ const Container = styled.div`
   left: 32px;
   top: 32px;
   display: flex;
+  align-items: center;
 `;
 
 const SecondaryContainer = styled.div`
@@ -17,9 +18,13 @@ const SecondaryContainer = styled.div`
 
 const Name = styled.div`
   display: flex;
-  height: 50px;
+  height: 45px;
   align-items: center;
   justify-content: center;
+  font-weight: bold;
+  background-color: ${props => props.theme.lightSmoke};
+  color: ${props => props.theme.orange};
+  border-radius: 4px;
 `;
 
 @inject("playerStore")

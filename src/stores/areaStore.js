@@ -1,5 +1,6 @@
 import { action, observable, computed } from "mobx";
 import areas from "../config/areas";
+import rootStore from "./index";
 import {
   EVENT_NPC_DIED,
   EVENT_NPC_RECEIVE_DAMAGE,
@@ -15,11 +16,13 @@ class AreaStore {
   @observable npcs = [];
   @observable name = "";
   @observable areaIndex = 0;
+  @observable targetNpc = null;
 
   constructor() {
     on(EVENT_TICK, () => {});
 
     on(EVENT_PLAYER_HIT_NPC, npc => {
+      this.targetNpc = npc;
       if (npc.aggro) return;
       npc.aggro = true;
       npc.hitIntervalId = setInterval(() => {
@@ -32,6 +35,7 @@ class AreaStore {
       npc.items = this.generateLoot(npc);
       npc.aggro = false;
       setTimeout(() => {
+        if (this.targetNpc === npc) this.targetNpc = null;
         this.respawnNewNpcAtExisting(npc);
       }, 10000);
     });

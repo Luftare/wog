@@ -18,12 +18,12 @@ const Container = styled.div`
   height: 100vh;
 `;
 
-@inject("router")
 @inject("areaStore")
 @inject("playerStore")
 @inject("mapStore")
 @inject("inventoryStore")
 @inject("rootStore")
+@inject("router")
 @observer
 class Area extends Component {
   handlePlayerDeath = () => {
@@ -54,8 +54,9 @@ class Area extends Component {
   }
 
   render() {
-    const { areaStore, inventoryStore } = this.props;
+    const { areaStore, inventoryStore, router } = this.props;
     const showLoot = inventoryStore.loot.length > 0;
+    router.params.id; //force update
     return (
       <Container>
         <AreasMap />
