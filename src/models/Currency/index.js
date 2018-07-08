@@ -3,5 +3,6 @@ export default class Currency {
     this.amount = amount;
     this.name = `${this.amount} gold`;
     this.description = "Start of a fortune.";
+    this.details = [];
   }
 }

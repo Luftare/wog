@@ -36,6 +36,7 @@ export default class Item extends Component {
         <Tooltip
           title={item.name}
           body={item.description}
+          details={item.details}
           right={tooltipRight}
         />
         {item.name}

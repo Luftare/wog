@@ -19,6 +19,9 @@ const conf = {
   },
   levelToPlayerHpRegeneration(level) {
     return 1 + level * 0.1;
+  },
+  levelToWeaponDamage(level) {
+    return level;
   }
 };
 

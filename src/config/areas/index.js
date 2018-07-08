@@ -1,5 +1,6 @@
 import Rat from "../../models/NPC/Rat";
 import Item from "../../models/Item";
+import SmallDagger from "../../models/Item/SmallDagger";
 import Gold from "../../models/Currency";
 
 export default [
@@ -34,8 +35,8 @@ export default [
         dropRate: 0.9
       },
       {
-        item: Item,
-        dropRate: 0.2
+        item: SmallDagger,
+        dropRate: 0.99
       },
       {
         item: Item,

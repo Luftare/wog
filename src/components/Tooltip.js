@@ -20,11 +20,12 @@ const Container = styled.div`
 
 export default class Tooltip extends Component {
   render() {
-    const { title, body, right } = this.props;
+    const { title, details, body, right } = this.props;
 
     return (
       <Container right={right}>
         <h3>{title}</h3>
+        {details.map((detail, i) => <div key={i}>{detail}</div>)}
         <div>{body}</div>
       </Container>
     );
