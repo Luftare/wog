@@ -54,10 +54,13 @@ class PlayerStore {
     });
 
     on(EVENT_PLAYER_HIT_NPC, npc => {
-      const damage = this.damage;
+      let damage = this.damage;
+      const crit = Math.random() <= this.critRate;
+      if (crit) damage *= 2;
       emit(EVENT_NPC_RECEIVE_DAMAGE, {
         npc,
-        damage
+        damage,
+        crit
       });
     });
 
@@ -125,6 +128,11 @@ class PlayerStore {
   }
 
   @computed
+  get hpRegeneration() {
+    return stats.levelToPlayerHpRegeneration(this.level);
+  }
+
+  @computed
   get experienceRatio() {
     return this.experience / stats.experienceToNextLevelAtLevel(this.level);
   }
@@ -137,6 +145,11 @@ class PlayerStore {
   @computed
   get damage() {
     return this.baseDamage + rootStore.inventory.equippedItemsDamageModifier;
+  }
+
+  @computed
+  get critRate() {
+    return Math.floor(1000 * stats.levelToBaseCritRate(this.level)) / 1000;
   }
 }
 

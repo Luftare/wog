@@ -20,8 +20,13 @@ export default styled.span`
   opacity: 0;
   top: ${props => props.top || 0};
   left: ${props => props.left || 0};
-  font-size: ${props => (props.big ? "24px" : "18px")};
+  font-size: ${props => (props.big ? "28px" : "18px")};
   color: ${props => props.color || "white"};
-  animation: ${animation} ${props => (props.big ? "1500ms" : "1000ms")};
+  animation: ${animation} ${props => (props.big ? "1800ms" : "1000ms")};
   text-shadow: 2px 2px 1px black;
+  ${props =>
+    props.big &&
+    `
+    z-index: 30;
+  `};
 `;

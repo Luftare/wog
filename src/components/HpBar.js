@@ -6,7 +6,7 @@ const Container = styled.div`
   height: 20px;
   border: 2px solid ${props => props.theme.smoke};
   box-sizing: border-box;
-  border-radius: 2px;
+  border-radius: 4px;
   overflow: hidden;
 `;
 
@@ -16,7 +16,7 @@ const Bar = styled.div`
   height: 100%;
   transition: all 200ms;
   width: ${props => Math.min(100, Math.max(0, props.ratio * 100))}%;
-  border-radius: 2px;
+  border-radius: 4px;
 `;
 
 export default class HpBar extends Component {

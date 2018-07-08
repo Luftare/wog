@@ -25,6 +25,9 @@ const conf = {
   },
   itemSellPrice(level, rarity) {
     return level * (1 + rarity);
+  },
+  levelToBaseCritRate(level) {
+    return 0.05 + level * 0.001;
   }
 };
 

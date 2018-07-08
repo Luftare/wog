@@ -90,11 +90,19 @@ export default class PlayerProfile extends Component {
               <span>Damage:</span>
               <span>{playerStore.damage}</span>
             </Stat>
+            <Stat>
+              <span>Crit Rate:</span>
+              <span>{`${100 * playerStore.critRate}%`}</span>
+            </Stat>
           </Stats>
           <Stats>
             <Stat>
               <span>Hp:</span>
               <span>{playerStore.maxHp}</span>
+            </Stat>
+            <Stat>
+              <span>Hp Reg:</span>
+              <span>{`${playerStore.hpRegeneration}Hp/s`}</span>
             </Stat>
           </Stats>
         </StatsContainer>

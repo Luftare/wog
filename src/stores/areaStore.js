@@ -1,5 +1,6 @@
 import { action, observable, computed } from "mobx";
 import areas from "../config/areas";
+import { theme } from "../style";
 import rootStore from "./index";
 import {
   EVENT_NPC_DIED,
@@ -40,11 +41,18 @@ class AreaStore {
       }, 10000);
     });
 
-    on(EVENT_NPC_RECEIVE_DAMAGE, ({ npc: targetNpc, damage }) => {
+    on(EVENT_NPC_RECEIVE_DAMAGE, ({ npc: targetNpc, damage, crit }) => {
       this.npcs = this.npcs.map(npc => {
         if (npc === targetNpc) {
           npc.hp -= damage;
-          npc.messages = [...npc.messages, { value: damage }];
+          npc.messages = [
+            ...npc.messages,
+            {
+              value: damage,
+              big: crit,
+              color: crit && theme.yellow
+            }
+          ];
           clearTimeout(npc.messageFlushTimeoutId);
           npc.messageFlushTimeoutId = setTimeout(() => {
             npc.messages = [];
