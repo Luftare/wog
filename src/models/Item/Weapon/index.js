@@ -1,5 +1,5 @@
-import Item from "./index";
-import stats from "../../config/stats";
+import Item from "../index";
+import stats from "../../../config/stats";
 
 export default class Weapon extends Item {
   constructor(props) {

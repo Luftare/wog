@@ -1,6 +1,6 @@
 import Rat from "../../models/NPC/Rat";
 import Item from "../../models/Item";
-import SmallDagger from "../../models/Item/SmallDagger";
+import SmallDagger from "../../models/Item/Weapon/SmallDagger";
 import Gold from "../../models/Currency";
 
 export default [
