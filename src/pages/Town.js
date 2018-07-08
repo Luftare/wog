@@ -14,14 +14,21 @@ const Container = styled.div`
 @inject("router")
 @observer
 class Town extends Component {
+  closeModals = () => {
+    const { mapStore } = this.props;
+    if (mapStore.isOpen) mapStore.toggleMap();
+  };
+
   componentDidMount(props) {
     const { mapStore } = this.props;
     on.key("m", mapStore.toggleMap);
+    on.key("Escape", this.closeModals);
   }
 
   componentWillUnmount() {
     const { mapStore } = this.props;
     off.key("m", mapStore.toggleMap);
+    off.key("Escape", this.closeModals);
   }
 
   render() {

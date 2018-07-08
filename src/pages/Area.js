@@ -30,9 +30,10 @@ class Area extends Component {
   };
 
   closeModals = () => {
-    const { inventoryStore } = this.props;
+    const { inventoryStore, mapStore } = this.props;
     inventoryStore.closeLoot();
     inventoryStore.closeInventory();
+    if(mapStore.isOpen) mapStore.toggleMap();
   };
 
   componentDidMount() {
