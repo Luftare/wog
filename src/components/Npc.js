@@ -53,6 +53,15 @@ const characterDeathAnimation = keyframes`
   }
 `;
 
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
 const Character = styled.div`
   position: relative;
   animation: ${characterArriveAnimation}
@@ -92,15 +101,6 @@ const Character = styled.div`
   }
   ${props => props.aggro && "box-shadow: 0 0 25px red;"}
   ${props => props.hitting && `animation: ${characterAttackAnimation} 200ms;`}
-`;
-
-const fadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
 `;
 
 const Shine = styled.img.attrs({

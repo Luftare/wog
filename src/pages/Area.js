@@ -43,7 +43,8 @@ class Area extends Component {
   componentWillUnmount() {
     const { rootStore } = this.props;
     off(EVENT_PLAYER_DIED, this.handlePlayerDeath);
-    on.key("Escape", rootStore.closeAllModals);
+    off.key("Escape", rootStore.closeAllModals);
+    rootStore.closeAllModals();
   }
 
   componentWillUpdate() {

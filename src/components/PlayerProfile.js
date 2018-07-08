@@ -19,12 +19,38 @@ const SlotName = styled.div`
   color: white;
 `;
 
+const Description = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+`;
+
+const StatsContainer = styled.div`
+  width: 350px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 8px;
+`;
+
 const Stats = styled.div`
-  background-color: #aaa;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(4, 20px)
+  grid-gap: 8px;
+  width: 100%;
+  background: grey;
 `;
 
 const Stat = styled.div`
-  color: black;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  padding: 4px;
+  box-sizing: border-box;
 `;
 
 @inject("playerStore")
@@ -51,16 +77,27 @@ export default class PlayerProfile extends Component {
         onClose={playerStore.toggleProfile}
         wide
       >
-        <div>{`Level ${playerStore.level}`}</div>
+        <Description>{`Level ${playerStore.level}`}</Description>
         {inventoryStore.equippedItemSlots.map((item, i) => (
           <ItemRow key={i}>
             {item ? <Item item={item} /> : <EmptyInventorySlot />}
             <SlotName>{inventoryStore.itemSlots[i].name}</SlotName>
           </ItemRow>
         ))}
-        <Stats>
-          <Stat>Damage {playerStore.damage}</Stat>
-        </Stats>
+        <StatsContainer>
+          <Stats>
+            <Stat>
+              <span>Damage:</span>
+              <span>{playerStore.damage}</span>
+            </Stat>
+          </Stats>
+          <Stats>
+            <Stat>
+              <span>Hp:</span>
+              <span>{playerStore.maxHp}</span>
+            </Stat>
+          </Stats>
+        </StatsContainer>
       </Modal>
     );
   }

@@ -22,6 +22,9 @@ const conf = {
   },
   levelToWeaponDamage(level) {
     return level;
+  },
+  itemSellPrice(level, rarity) {
+    return level * (1 + rarity);
   }
 };
 

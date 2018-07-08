@@ -5,9 +5,8 @@ export default styled.div`
   justify-content: center;
   align-items: center;
   height: 20px;
-  width: 20px;
-  color: black;
-  background-color: ${props => props.theme.red};
+  color: ${props => props.color || props.theme.white};
+  background-color: ${props => props.background || props.theme.red};
   cursor: pointer;
   pointer-events: all;
   box-shadow: ${props => props.theme.shadow};

@@ -30,6 +30,7 @@ const Container = styled.div`
   cursor: default;
   box-shadow: ${props => props.theme.shadow};
   border-radius: 4px;
+  color: white;
 `;
 
 const TopNav = styled.div`

@@ -1,8 +1,9 @@
 import { observable, action, computed } from "mobx";
 import Gold from "../models/Currency";
-//import stats from "../config/stats";
+import stats from "../config/stats";
 // import Item from "../models/Item";
 import { emit, on } from "../utils/eventBus";
+import rootStore from "./index";
 import {
   EVENT_TICK,
   EVENT_ITEM_CLICK,
@@ -29,13 +30,27 @@ class InventoryStore {
     on(EVENT_TICK, () => {});
 
     on(EVENT_ITEM_CLICK, item => {
-      const itemInInventory = this.items.includes(item);
+      const itemInInventory = this.notEquippedItems.includes(item);
+      const itemEquipped = this.equippedItems.includes(item);
+      const itemInLoot = this.loot.includes(item);
+
       if (itemInInventory) {
-        if (item.slot) {
+        if (rootStore.town.marketOpen) {
+          this.sellItem(item);
+        } else if (item.slot) {
           this.equipItem(item);
         }
-      } else if (!this.inventoryIsFull || item instanceof Gold) {
-        emit(EVENT_LOOT_ITEM, item);
+      }
+
+      if (itemEquipped) {
+        item.equipped = false;
+        this.items = [...this.items];
+      }
+
+      if (itemInLoot) {
+        if (!this.inventoryIsFull || item instanceof Gold) {
+          emit(EVENT_LOOT_ITEM, item);
+        }
       }
     });
 
@@ -96,6 +111,12 @@ class InventoryStore {
       0
     );
   }
+
+  @action
+  sellItem = item => {
+    this.items = this.items.filter(itm => itm !== item);
+    this.gold += stats.itemSellPrice(item.level, item.rarity);
+  };
 
   @action
   equipItem = item => {

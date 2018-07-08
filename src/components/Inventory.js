@@ -60,7 +60,7 @@ export default class Inventory extends Component {
           )}
         </Grid>
         <Footer>
-          <Gold>Gold: {inventoryStore.gold}</Gold>
+          <Gold>{inventoryStore.gold}g</Gold>
         </Footer>
       </Modal>
     );
