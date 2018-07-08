@@ -30,6 +30,7 @@ const Level = styled.div`
   border-radius: 25px;
   background-color: black;
   color: yellow;
+  font-weight: bold;
 `;
 
 export default class Avatar extends Component {

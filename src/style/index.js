@@ -31,5 +31,11 @@ export const theme = {
   },
   rarityColor(rarity) {
     return ["#aaa", "#fff", "#2e4", "44f", "#c2c", "#fa3"][rarity];
+  },
+  levelDiffColor(diff) {
+    if (diff <= -3) return "#aaa";
+    if (diff <= -1) return "#2e4";
+    if (diff <= 1) return "#ee5";
+    return "#f44";
   }
 };

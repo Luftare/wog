@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import styled, { keyframes } from "styled-components";
+import { inject, observer } from "mobx-react";
 import { emit } from "../utils/eventBus";
 import { EVENT_SHOW_LOOT } from "../constants";
+import { theme } from "../style";
 import HpBar from "./HpBar";
 import FlyingMessage from "./FlyingMessage";
 
@@ -129,9 +131,12 @@ const Level = styled.div`
   justify-content: center;
   align-items: center;
   background-color: black;
-  color: yellow;
+  color: ${props => props.color};
+  font-weight: bold;
 `;
 
+@inject("playerStore")
+@observer
 export default class Npc extends Component {
   handleClick = e => {
     e.preventDefault();
@@ -145,7 +150,7 @@ export default class Npc extends Component {
   };
 
   render() {
-    const { npc } = this.props;
+    const { npc, playerStore } = this.props;
     const hpRatio = npc.hp / npc.maxHp;
     const isDead = npc.hp <= 0;
     const noLoot = !npc.items.find(item => !!item);
@@ -153,7 +158,9 @@ export default class Npc extends Component {
       <Container onMouseDown={this.handleClick} dead={isDead}>
         <TopBar hidden={isDead}>
           <HpBar ratio={hpRatio} />
-          <Level>{npc.level}</Level>
+          <Level color={theme.levelDiffColor(npc.level - playerStore.level)}>
+            {npc.level}
+          </Level>
         </TopBar>
         <Character
           dead={isDead}
