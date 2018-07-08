@@ -18,13 +18,19 @@ const Container = styled.div`
   }
 `;
 
+const Title = styled.div`
+  color: ${props => props.color || "white"};
+  font-size: 16px;
+  font-weight: bold;
+`;
+
 export default class Tooltip extends Component {
   render() {
-    const { title, details, body, right } = this.props;
+    const { title, details, body, right, titleColor } = this.props;
 
     return (
       <Container right={right}>
-        <h3>{title}</h3>
+        <Title color={titleColor}>{title}</Title>
         {details.map((detail, i) => <div key={i}>{detail}</div>)}
         <div>{body}</div>
       </Container>

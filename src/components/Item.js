@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { emit } from "../utils/eventBus";
 import { EVENT_ITEM_CLICK } from "../constants";
+import { theme } from "../style";
 import Tooltip from "./Tooltip";
 
 const Container = styled.div`
@@ -19,6 +20,8 @@ const Container = styled.div`
   background-position: center;
   color: black;
   cursor: pointer;
+  box-shadow: ${props => props.theme.shadow};
+  border-radius: 4px;
   [class^="Tooltip"] {
     display: none;
   }
@@ -39,6 +42,7 @@ export default class Item extends Component {
       <Container onClick={() => emit(EVENT_ITEM_CLICK, item)} icon={item.icon}>
         <Tooltip
           title={item.name}
+          titleColor={theme.rarityColor(item.rarity)}
           body={item.description}
           details={item.details}
           right={tooltipRight}

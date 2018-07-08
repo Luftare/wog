@@ -1,25 +1,10 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import { theme } from "../style";
 import Item from "./Item";
 import EmptyInventorySlot from "./EmptyInventorySlot";
-import CloseButton from "./CloseButton";
+import Modal from "../containers/Modal";
 import { inject, observer } from "mobx-react";
-
-const Container = styled.div`
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  left: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  padding: 8px;
-  width: 200px;
-  box-sizing: border-box;
-  background-color: grey;
-  pointer-events: all;
-  z-index: 100;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
-`;
 
 const ItemRow = styled.div`
   width: 100%;
@@ -33,12 +18,8 @@ const ItemRow = styled.div`
 const ItemName = styled.div`
   display: flex;
   align-items: center;
-  color: yellow;
-`;
-
-const Header = styled.div`
-  display: flex;
-  justify-content: flex-end;
+  color: ${props => props.color || "whtie"};
+  font-weight: bold;
 `;
 
 @inject("inventoryStore")
@@ -47,10 +28,7 @@ export default class DroppedItems extends Component {
   render() {
     const { loot, closeLoot } = this.props.inventoryStore;
     return (
-      <Container>
-        <Header>
-          <CloseButton onClick={closeLoot}>x</CloseButton>
-        </Header>
+      <Modal title={"Loot"} visible left onClose={closeLoot}>
         {loot.map((item, i) => (
           <ItemRow>
             {item ? (
@@ -58,10 +36,12 @@ export default class DroppedItems extends Component {
             ) : (
               <EmptyInventorySlot key={i} />
             )}
-            <ItemName>{item && item.name}</ItemName>
+            <ItemName color={theme.rarityColor(item && item.rarity)}>
+              {item && item.name}
+            </ItemName>
           </ItemRow>
         ))}
-      </Container>
+      </Modal>
     );
   }
 }

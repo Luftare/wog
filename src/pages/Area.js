@@ -8,6 +8,7 @@ import PlayerStatus from "../components/PlayerStatus";
 import PlayerProfile from "../components/PlayerProfile";
 import AreasMap from "../components/AreasMap";
 import ActionBar from "../components/ActionBar";
+import Inventory from "../components/Inventory";
 import DroppedItems from "../components/DroppedItems";
 import Npc from "../components/Npc";
 import NpcContainer from "../containers/NpcContainer";
@@ -61,6 +62,7 @@ class Area extends Component {
         <AreasMap />
         <PlayerProfile />
         <PlayerStatus />
+        <Inventory />
         {showLoot && <DroppedItems />}
         <NpcContainer>
           {areaStore.npcs.map((npc, i) => (

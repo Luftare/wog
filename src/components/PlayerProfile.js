@@ -4,20 +4,7 @@ import { inject, observer } from "mobx-react";
 import { on, off } from "../utils/eventBus";
 import Item from "./Item";
 import EmptyInventorySlot from "./EmptyInventorySlot";
-
-const Container = styled.div`
-  position: absolute;
-  left: 50vw;
-  top: 50vh;
-  padding: 8px;
-  box-sizing: border-box;
-  transform: translate(-50%, -50%);
-  width: 500px;
-  display: ${props => (props.visible ? "block" : "none")};
-  background-color: grey;
-  z-index: 150;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
-`;
+import Modal from "../containers/Modal";
 
 const ItemRow = styled.div`
   display: grid;
@@ -58,8 +45,12 @@ export default class PlayerProfile extends Component {
     const { playerStore, inventoryStore } = this.props;
 
     return (
-      <Container visible={playerStore.profileIsOpen}>
-        <h3>{playerStore.name}</h3>
+      <Modal
+        title={playerStore.name}
+        visible={playerStore.profileIsOpen}
+        onClose={playerStore.toggleProfile}
+        wide
+      >
         <div>{`Level ${playerStore.level}`}</div>
         {inventoryStore.equippedItemSlots.map((item, i) => (
           <ItemRow key={i}>
@@ -70,7 +61,7 @@ export default class PlayerProfile extends Component {
         <Stats>
           <Stat>Damage {playerStore.damage}</Stat>
         </Stats>
-      </Container>
+      </Modal>
     );
   }
 }

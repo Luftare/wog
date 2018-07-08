@@ -21,9 +21,15 @@ export const theme = {
   white: "#fff",
   black: "#222",
   grey: "#777",
+  shadow: "1px 1px 4px rgba(0, 0, 0, 0.5)",
+  smoke: "rgba(50, 50, 50, 0.7)",
+  red: "#e44",
   gutter: {
     m: "32px",
     l: "80px",
     xl: "240px"
+  },
+  rarityColor(rarity) {
+    return ["#aaa", "#fff", "#2e4", "44f", "#c2c", "#fa3"][rarity];
   }
 };

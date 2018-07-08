@@ -12,6 +12,8 @@ const Container = styled.div`
   color: yellow;
   cursor: pointer;
   border: ${props => (props.active ? "2px solid yellow" : "none")};
+  box-shadow: ${props => props.theme.shadow};
+  border-radius: 4px;
 `;
 
 export default class ActionBarButton extends Component {

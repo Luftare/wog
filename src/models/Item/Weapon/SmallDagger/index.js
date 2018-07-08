@@ -7,7 +7,7 @@ export default class SmallDagger extends Weapon {
     super(props);
     this.name = "Small dagger";
     this.description = `A handy tool for letter opening.`;
-    this.rarity = 1;
+    this.rarity = 0;
     this.slot = ITEM_SLOT_RIGHT_HAND;
     this.icon = image;
   }

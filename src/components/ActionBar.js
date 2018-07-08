@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import ExperienceBar from "./ExperienceBar";
-import Inventory from "./Inventory";
 import ActionBarButton from "./ActionBarButton";
 
 const Container = styled.div`
@@ -25,7 +24,6 @@ class ActionBar extends Component {
     return (
       <Container>
         <ExperienceBar />
-        <Inventory />
         <ActionBarButton
           onClick={inventoryStore.toggleInventory}
           active={inventoryStore.isOpen}
