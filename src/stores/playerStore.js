@@ -2,6 +2,8 @@ import { observable, action, computed } from "mobx";
 import stats from "../config/stats";
 import areaStore from "./areaStore";
 import { emit, on } from "../utils/eventBus";
+import rootStore from "./index";
+
 import {
   EVENT_NPC_DIED,
   EVENT_TICK,
@@ -45,7 +47,7 @@ class PlayerStore {
     });
 
     on(EVENT_PLAYER_HIT_NPC, npc => {
-      const damage = this.meleeDamage;
+      const damage = this.damage;
       emit(EVENT_NPC_RECEIVE_DAMAGE, {
         npc,
         damage
@@ -74,7 +76,7 @@ class PlayerStore {
   @action
   toggleProfile = () => {
     this.profileIsOpen = !this.profileIsOpen;
-  }
+  };
 
   @action
   handleExperienceGain = experience => {
@@ -116,8 +118,13 @@ class PlayerStore {
   }
 
   @computed
-  get meleeDamage() {
+  get baseDamage() {
     return stats.levelToPlayerBaseDamage(this.level);
+  }
+
+  @computed
+  get damage() {
+    return this.baseDamage + rootStore.inventory.equippedItemsDamageModifier;
   }
 }
 

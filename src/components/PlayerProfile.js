@@ -31,6 +31,14 @@ const SlotName = styled.div`
   color: white;
 `;
 
+const Stats = styled.div`
+  background-color: #aaa;
+`;
+
+const Stat = styled.div`
+  color: black;
+`;
+
 @inject("playerStore")
 @inject("inventoryStore")
 @observer
@@ -58,6 +66,9 @@ export default class PlayerProfile extends Component {
             <SlotName>{inventoryStore.itemSlots[i].name}</SlotName>
           </ItemRow>
         ))}
+        <Stats>
+          <Stat>Damage {playerStore.damage}</Stat>
+        </Stats>
       </Container>
     );
   }

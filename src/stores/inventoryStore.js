@@ -17,7 +17,8 @@ class InventoryStore {
   @observable inventorySize = 12;
   @observable loot = [];
   @observable gold = 0;
-  @observable itemSlots = [
+  @observable
+  itemSlots = [
     {
       id: ITEM_SLOT_RIGHT_HAND,
       name: "Hand"
@@ -86,6 +87,14 @@ class InventoryStore {
   @computed
   get allItemsLooted() {
     return this.loot.length > 0 && !this.loot.find(item => !!item);
+  }
+
+  @computed
+  get equippedItemsDamageModifier() {
+    return this.equippedItems.reduce(
+      (sum, item) => (item.damage ? item.damage : 0),
+      0
+    );
   }
 
   @action
