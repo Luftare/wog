@@ -16,6 +16,7 @@ const Container = styled.div`
   display: ${props => (props.visible ? "block" : "none")};
   background-color: grey;
   z-index: 150;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
 `;
 
 const ItemRow = styled.div`

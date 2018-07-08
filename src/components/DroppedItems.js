@@ -18,6 +18,7 @@ const Container = styled.div`
   background-color: grey;
   pointer-events: all;
   z-index: 100;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
 `;
 
 const ItemRow = styled.div`

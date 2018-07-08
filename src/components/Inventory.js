@@ -15,6 +15,7 @@ const Container = styled.div`
   transform: translateY(-100%);
   box-sizing: border-box;
   background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
 `;
 
 const Header = styled.div`

@@ -13,6 +13,10 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   background-color: orange;
+  background-image: url('${props => props.icon || ""}');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   color: black;
   cursor: pointer;
   [class^="Tooltip"] {
@@ -32,14 +36,13 @@ export default class Item extends Component {
     const { item, tooltipRight } = this.props;
 
     return (
-      <Container onClick={() => emit(EVENT_ITEM_CLICK, item)}>
+      <Container onClick={() => emit(EVENT_ITEM_CLICK, item)} icon={item.icon}>
         <Tooltip
           title={item.name}
           body={item.description}
           details={item.details}
           right={tooltipRight}
         />
-        {item.name}
       </Container>
     );
   }
