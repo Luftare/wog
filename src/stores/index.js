@@ -1,3 +1,4 @@
+import { observable, action } from "mobx";
 import Router from "./Router";
 import areaStore from "./areaStore";
 import playerStore from "./playerStore";
@@ -9,16 +10,23 @@ const closeAllModals = () => {
   inventoryStore.closeLoot();
   inventoryStore.closeInventory();
   if (mapStore.isOpen) mapStore.toggleMap();
-  if(playerStore.profileIsOpen) playerStore.toggleProfile();
+  if (playerStore.profileIsOpen) playerStore.toggleProfile();
 };
 
-const stores = {
-  router: new Router(routes),
-  player: playerStore,
-  inventory: inventoryStore,
-  area: areaStore,
-  map: mapStore,
-  closeAllModals
-};
+class RootStore {
+  @observable router = new Router(routes);
+  @observable player = playerStore;
+  @observable inventory = inventoryStore;
+  @observable area = areaStore;
+  @observable map = mapStore;
 
-export default stores;
+  @action
+  closeAllModals = () => {
+    this.invantory.closeLoot();
+    this.inventory.closeInventory();
+    if (this.map.isOpen) mapStore.toggleMap();
+    if (this.playr.profileIsOpen) this.player.toggleProfile();
+  };
+}
+
+export default new RootStore();
