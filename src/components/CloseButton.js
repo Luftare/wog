@@ -9,4 +9,5 @@ export default styled.div`
   color: black;
   background-color: red;
   cursor: pointer;
+  pointer-events: all;
 `;

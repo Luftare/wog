@@ -32,13 +32,7 @@ class Area extends Component {
   };
 
   componentDidMount() {
-    const {
-      areaStore,
-      inventoryStore,
-      router,
-      mapStore,
-      rootStore
-    } = this.props;
+    const { areaStore, router, rootStore } = this.props;
     areaStore.setArea(router.params.id);
     areaStore.createNpcs();
     on(EVENT_PLAYER_DIED, this.handlePlayerDeath);
@@ -46,7 +40,7 @@ class Area extends Component {
   }
 
   componentWillUnmount() {
-    const { inventoryStore, mapStore, areaStore, rootStore } = this.props;
+    const { rootStore } = this.props;
     off(EVENT_PLAYER_DIED, this.handlePlayerDeath);
     on.key("Escape", rootStore.closeAllModals);
   }

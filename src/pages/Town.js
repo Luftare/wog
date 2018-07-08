@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
-import { emit, on, off } from "../utils/eventBus";
-import { EVENT_TOGGLE_MAP } from "../constants";
+import { on, off } from "../utils/eventBus";
 import AreasMap from "../components/AreasMap";
 import PlayerProfile from "../components/PlayerProfile";
 import ActionBar from "../components/ActionBar";
+import Market from "../components/Market";
 
 const Container = styled.div`
   position: relative;
@@ -34,13 +34,13 @@ class Town extends Component {
   }
 
   render() {
-    const { mapStore } = this.props;
     return (
       <Container>
         <PlayerProfile />
         <AreasMap />
         <TownContainer>
           <h1>Town</h1>
+          <Market />
         </TownContainer>
         <ActionBar />
       </Container>

@@ -81,6 +81,7 @@ const Character = styled.div`
   :active {
     ${props =>
       !props.dead &&
+      !props.hitting &&
       `
       background-color: rgba(255, 0, 0, 0.2);
       animation: none;

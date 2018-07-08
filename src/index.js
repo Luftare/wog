@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import RouterComponent from "./components/Router";
 import registerServiceWorker from "./registerServiceWorker";
+import { ThemeProvider } from "styled-components";
+import { theme } from "./style";
 import { Provider } from "mobx-react";
 import Ticker from "./utils/Ticker";
 import { EVENT_TICK } from "./constants";
@@ -22,9 +24,12 @@ const Root = (
     inventoryStore={rootStore.inventory}
     areaStore={rootStore.area}
     mapStore={rootStore.map}
+    townStore={rootStore.town}
     rootStore={rootStore}
   >
-    <RouterComponent />
+    <ThemeProvider theme={theme}>
+      <RouterComponent />
+    </ThemeProvider>
   </Provider>
 );
 
