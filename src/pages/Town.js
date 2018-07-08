@@ -11,13 +11,12 @@ import Market from "../components/Market";
 const Container = styled.div`
   position: relative;
   height: 100vh;
-  display: grid;
-  grid-template-rows: 1fr auto;
   background-color: lightgrey;
 `;
 
 const TownContainer = styled.div`
   display: flex;
+  height: 100%;
   justify-content: space-around;
   align-items: center;
 `;

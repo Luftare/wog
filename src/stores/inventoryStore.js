@@ -43,8 +43,10 @@ class InventoryStore {
       }
 
       if (itemEquipped) {
-        item.equipped = false;
-        this.items = [...this.items];
+        if (!this.inventoryIsFull) {
+          item.equipped = false;
+          this.items = [...this.items];
+        }
       }
 
       if (itemInLoot) {

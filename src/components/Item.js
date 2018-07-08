@@ -30,6 +30,10 @@ const Container = styled.div`
       display: unset;
     }
   }
+  :active {
+    box-shadow: none;
+    transform: translateY(1px);
+  }
 `;
 
 @inject("playerStore")

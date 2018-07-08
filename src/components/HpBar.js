@@ -4,15 +4,19 @@ import styled from "styled-components";
 const Container = styled.div`
   display: block;
   height: 20px;
-  background-color: red;
+  border: 2px solid ${props => props.theme.smoke};
+  box-sizing: border-box;
+  border-radius: 2px;
+  overflow: hidden;
 `;
 
 const Bar = styled.div`
   display: block;
-  background-color: green;
+  background-color: ${props => props.theme.green};
   height: 100%;
   transition: all 200ms;
   width: ${props => Math.min(100, Math.max(0, props.ratio * 100))}%;
+  border-radius: 2px;
 `;
 
 export default class HpBar extends Component {

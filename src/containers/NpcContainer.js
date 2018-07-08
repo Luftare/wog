@@ -6,8 +6,7 @@ export default styled.div`
   align-items: center;
   height: 100%;
   width: 100%;
-  padding-top: 10%;
   box-sizing: border-box;
-  background-color: lightgreen;
+  background-color: #aaa;
   overflow: hidden;
 `;

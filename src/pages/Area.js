@@ -16,8 +16,6 @@ import NpcContainer from "../containers/NpcContainer";
 const Container = styled.div`
   position: relative;
   height: 100vh;
-  display: grid;
-  grid-template-rows: 1fr auto;
 `;
 
 @inject("router")

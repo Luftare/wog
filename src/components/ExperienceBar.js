@@ -11,8 +11,9 @@ const Container = styled.div`
   width: 100%;
   max-width: 700px;
   height: 10px;
-  border: 2px solid grey;
+  border: 2px solid ${props => props.theme.smoke};
   box-sizing: border-box;
+  border-radius: 8px;
 `;
 
 const Bar = styled.div`
@@ -21,6 +22,7 @@ const Bar = styled.div`
   height: 100%;
   transition: all 100ms;
   width: ${props => Math.min(100, Math.max(0, props.ratio * 100))}%;
+  border-radius: 8px;
 `;
 
 @inject("playerStore")
