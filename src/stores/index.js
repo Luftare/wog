@@ -22,10 +22,10 @@ class RootStore {
 
   @action
   closeAllModals = () => {
-    this.invantory.closeLoot();
+    this.inventory.closeLoot();
     this.inventory.closeInventory();
     if (this.map.isOpen) mapStore.toggleMap();
-    if (this.playr.profileIsOpen) this.player.toggleProfile();
+    if (this.player.profileIsOpen) this.player.toggleProfile();
   };
 }
 

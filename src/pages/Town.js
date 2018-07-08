@@ -5,10 +5,17 @@ import { emit, on, off } from "../utils/eventBus";
 import { EVENT_TOGGLE_MAP } from "../constants";
 import AreasMap from "../components/AreasMap";
 import PlayerProfile from "../components/PlayerProfile";
+import ActionBar from "../components/ActionBar";
 
 const Container = styled.div`
-  color: orange;
+  position: relative;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  background-color: lightgrey;
 `;
+
+const TownContainer = styled.div``;
 
 @inject("playerStore")
 @inject("mapStore")
@@ -32,7 +39,10 @@ class Town extends Component {
       <Container>
         <PlayerProfile />
         <AreasMap />
-        <h1>Town</h1>
+        <TownContainer>
+          <h1>Town</h1>
+        </TownContainer>
+        <ActionBar />
       </Container>
     );
   }
