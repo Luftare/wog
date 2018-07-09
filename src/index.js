@@ -25,6 +25,7 @@ const Root = (
     areaStore={rootStore.area}
     mapStore={rootStore.map}
     townStore={rootStore.town}
+    UiStore={rootStore.ui}
     rootStore={rootStore}
   >
     <ThemeProvider theme={theme}>

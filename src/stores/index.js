@@ -5,6 +5,7 @@ import playerStore from "./playerStore";
 import inventoryStore from "./inventoryStore";
 import mapStore from "./mapStore";
 import townStore from "./townStore";
+import UiStore from "./UiStore";
 import routes from "../config/routes";
 
 class RootStore {
@@ -14,6 +15,7 @@ class RootStore {
   @observable area = areaStore;
   @observable map = mapStore;
   @observable town = townStore;
+  @observable ui = UiStore;
 
   @action
   closeAllModals = () => {
