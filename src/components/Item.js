@@ -13,7 +13,6 @@ const Container = styled.div`
   height: 100%;
   justify-content: center;
   align-items: center;
-  background-color: orange;
   background-image: url('${props => props.icon || ""}');
   background-size: contain;
   background-repeat: no-repeat;
