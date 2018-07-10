@@ -68,8 +68,8 @@ const Character = styled.div`
     ${() => Math.floor(Math.random() * 200 + 1000)}ms infinite linear;
   transform-origin: 50% 100%;
   display: block;
-  width: 120px;
-  height: 120px;
+  width: 10vw;
+  height: 10vw;
   border-radius: 120px;
   background-image: url("${props => props.image}");
   background-size: contain;

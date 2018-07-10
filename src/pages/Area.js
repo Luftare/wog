@@ -16,6 +16,10 @@ import NpcContainer from "../containers/NpcContainer";
 const Container = styled.div`
   position: relative;
   height: 100vh;
+  background-image: url('${props => props.background}');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 `;
 
 @inject("areaStore")
@@ -55,10 +59,11 @@ class Area extends Component {
 
   render() {
     const { areaStore, inventoryStore, router } = this.props;
+    console.log(areaStore.area);
     const showLoot = inventoryStore.loot.length > 0;
     router.params.id; //force update
     return (
-      <Container>
+      <Container background={areaStore.area.background}>
         <AreasMap />
         <PlayerProfile />
         <PlayerStatus />

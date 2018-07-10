@@ -7,6 +7,6 @@ export default styled.div`
   height: 100%;
   width: 100%;
   box-sizing: border-box;
-  background-color: #aaa;
   overflow: hidden;
+  padding-top: 10%;
 `;
