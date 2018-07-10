@@ -1,4 +1,4 @@
-import Rat from "../../models/NPC/Rat";
+import Rat from "../../models/NPC/Creep/Rat";
 import Item from "../../models/Item";
 import SmallDagger from "../../models/Item/Weapon/SmallDagger";
 import Gold from "../../models/Currency";

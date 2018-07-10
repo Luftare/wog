@@ -157,6 +157,7 @@ export default class Npc extends Component {
     const hpRatio = npc.hp / npc.maxHp;
     const isDead = npc.hp <= 0;
     const noLoot = !npc.items.find(item => !!item);
+    const image = isDead ? npc.imageDead : npc.image;
     return (
       <Container onMouseDown={this.handleClick} dead={isDead}>
         <TopBar hidden={isDead}>
@@ -168,7 +169,7 @@ export default class Npc extends Component {
         <Character
           dead={isDead}
           noLoot={noLoot}
-          image={npc.image}
+          image={image}
           aggro={npc.aggro}
           hitting={npc.hitting}
         >
