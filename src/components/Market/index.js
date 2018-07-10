@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import Modal from "../../containers/Modal";
+import buildingImage from "./building.svg";
 
 const Container = styled.div`
   position: static;
-  width: 100px;
-  height: 100px;
+  width: 15vw;
+  height: 15vw;
 `;
 
 const Image = styled.div`
@@ -16,7 +17,10 @@ const Image = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: pink;
+  background-image: url("${props => props.image}");
+  background-size: contain;
+  background-image-position: center;
+  background-repeat: no-repeat;
   cursor: pointer;
 `;
 
@@ -57,7 +61,7 @@ export default class Market extends Component {
 
     return (
       <Container>
-        <Image onClick={this.handleMarketClick}>Market</Image>
+        <Image onClick={this.handleMarketClick} image={buildingImage} />
         <Modal
           onClose={toggleMarket}
           visible={marketOpen}

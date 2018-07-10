@@ -7,11 +7,15 @@ import PlayerProfile from "../components/PlayerProfile";
 import ActionBar from "../components/ActionBar";
 import Inventory from "../components/Inventory";
 import Market from "../components/Market";
+import background from "../config/areas/town/background.svg";
 
 const Container = styled.div`
   position: relative;
   height: 100vh;
-  background-color: lightgrey;
+  background-image: url('${background}');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 `;
 
 const TownContainer = styled.div`
