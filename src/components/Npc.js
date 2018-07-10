@@ -83,7 +83,6 @@ const Character = styled.div`
     `
     animation: ${characterDeathAnimation} 600ms
     transform-origin: 50% 50%;
-    ${props.noLoot ? "opacity: 0.5;" : ""}
     transform: rotateZ(90deg);
   `};
   :hover {

@@ -1,3 +1,5 @@
+import icon from "./icon.svg";
+
 export default class Currency {
   constructor(amount) {
     this.amount = amount;
@@ -5,5 +7,6 @@ export default class Currency {
     this.description = "Start of a fortune.";
     this.details = [];
     this.rarity = 0;
+    this.icon = icon;
   }
 }
